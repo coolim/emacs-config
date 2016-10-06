@@ -180,6 +180,13 @@
   nil)
 
 
+;; =======================================
+;; magit
+;; =======================================
+(global-set-key "\C-xg" 'magit-status)
+
+
+
 (provide 'emacs-setting)
 ;;; emacs-setting.el ends here
 

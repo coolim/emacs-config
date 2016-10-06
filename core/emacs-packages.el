@@ -159,6 +159,33 @@
 (every #'temp-installed-package lists)
 
 
+;; package-activated-list
+;;(autopair magit git-commit magit-popup with-editor dash async)
+
+;; emacs-packages
+;;(autopair magit)
+
+;;(set-difference LIST1 LIST2 [KEYWORD VALUE]...)
+;; LIST1 에서 LIST2 에 있는 내용을 뺀 상태에서의 LIST1 이 결과이다..
+(set-difference package-activated-list emacs-packages)
+;; 결과는 아래와 같다.
+;; (git-commit magit-popup with-editor dash async)
+
+;; LIST1 에서 LIST2 의 목록을 빼면 LIST1에는 아무것도 남지 않는다.
+(set-difference emacs-packages package-activated-list)
+;; 그러므로 결과는  nil 이다.
+
+;; 현재 Active 되어져 있는 것들중에 emacs-packages 에 없는 것들을 보여준다.
+;; 아래 구문은 실행되어지면 바로 package 목록이 보여지기 때문에 주석처리 한다.
+;;(package-show-package-list (set-difference package-activated-list emacs-packages))
+
+
+;;
+;; LISP EXAMPLES
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 
 
 (provide 'emacs-packages)
