@@ -16,12 +16,12 @@
 ;; (add-to-list 'package-archives
 ;; 	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-;; (add-to-list 'package-archives
-;;              '("melpa" . "https://melpa.org/packages/") t)
-
-
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
+
+
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 ;; 원래 ~/.emacs.d/elpa 인데 아래 설정을 하지 않으면 어떻게 되는가?
 ;; set package-user-dir to be relative to Prelude install path
