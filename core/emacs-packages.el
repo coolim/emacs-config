@@ -37,11 +37,12 @@
 (defvar emacs-packages
   '(
     autopair
+    magit
     )
   "설치할 패키지 목록들이다.")
 
 ;;; 패키지 인스톨을 실행한다고 바로 설치가 되는것이 아니다.
-;;; package-refresh-contents 를 통해 refresh 를 하고 package-install 명령을 내려야 한다.
+;;; `package-refresh-contents' 를 통해 refresh 를 하고 `package-install' 명령을 내려야 한다.
 
 ;; autopair 가 설치되어 있지 않다면 설치한다.
 ;; (unless (package-installed-p 'autopair)
@@ -56,33 +57,72 @@
 
 
 
-;; 현재 emacs-packages 목록에 있는 패키지가 설치되어져 있는지 확인한다.
-;; cl에 있는 함수이다. emacs-packages 에 있는 리스트 목록에서 하나씩 가져와서 package-installed-p 를 체크한다.
+;; 현재 `emacs-packages' 목록에 있는 패키지가 설치되어져 있는지 확인한다.
+;; cl에 있는 함수이다. `emacs-packages' 에 있는 리스트 목록에서 하나씩 가져와서 `package-installed-p' 를 체크한다.
 ;; 그 중에 하나가 오류가 생기면 바로 리턴되어진다.
 (defun emacs-packages-installed-p ()
   "Check if all pakcages in `emacs-packages' are installed"
   (every #'package-installed-p emacs-packages))
 
 ;;; emacs-packaged 목록에 있는 것중에 하나라도 설치되어 있지 않다면
-(unless (emacs-packages-installed-p)
-  (message "%s" "fucking not installed"))
+;; (unless (emacs-packages-installed-p)
+;;   (message "%s" "fucking not installed"))
 
 ;;; emacs-packaged 목록에 있는 것이 전부 설치 되어 있다면 
-(when (emacs-packages-installed-p)
-  (message "%s" "all installed. Good Job :D"))
+;; (when (emacs-packages-installed-p)
+;;   (message "%s" "all installed. Good Job :D"))
 
 
-(defun emacs-packages-install-query ()
-  "`emacs-packages' 가 설치 되어 있는가?"
-  (interactive)
-  (if (emacs-packages-installed-p)
-      (message "%s" "success great")
-    (message "%s" "failed fuck")))
+;; (defun emacs-packages-install-query ()
+;;   "`emacs-packages' 가 설치 되어 있는가?"
+;;   (interactive)
+;;   (if (emacs-packages-installed-p)
+;;       (message "%s" "success great")
+;;     (message "%s" "failed fuck")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; 파라미터로 하나의 패키지가 들어간다.
+(defun emacs-require-package (package)
+  "package 설치되어 있지 않으면 `emacs-packages' 목록에 추가하고 package 설치한다"
+  (unless (memq package emacs-packages)     ;; `emacs-packages' 목록에 package 가 없으면
+    (add-to-list 'emacs-packages package))  ;; `emacs-packages' 목록에 추가한다.
+  (unless (package-installed-p package)     ;; package 가 설치되어 있지 않으면
+    (package-install package)))             ;; package 를 설치한다.
+
+
+
+;;; `emacs-require-package' 에 목록을 파라미터로 넣기 위해서 mapc 를 이용한다.
+(defun emacs-require-packages (packages)
+  "목록을 가지고 설치 유무를 판단해서 패키지 설치한다."
+  (mapc #'emacs-require-package packages))  ;; mapc 를 통해서 목록별로 `emacs-require-package' 함수를 호출한다.
+
+
+
+
+(defun emacs-install-packages ()
+  "`emacs-packages' 목록에 있는 패키지들을 설치한다."
+  (unless (emacs-packages-installed-p) ;; `emacs-packages-installed-p' 를 통해 `emacs-packages' 목록에 설치되어 있지 않은 패키지가 있다면
+    (message "%s" "Emacs install packages...")
+    (package-refresh-contents) ;; 설치하기 전에 package listing 을 해야 한다.
+    (message "%s" " done.")
+    (emacs-require-packages emacs-packages) ;; 미처 설치 되지 않은 `emacs-packages' 에 있는 패키지를 설치한다.
+    ))
+
+;; 아래 함수를 실행해도 `emacs-packages' 에 있는 목록에 모두 설치 되어 있다면 loading 속도는
+;; 신경을 쓰지 않아도 될것이다.
+(emacs-install-packages)
+
+
+;; 이미 갱신되어진 package list 를 보여준다.
+;; (package-show-package-list)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; LISP EXAMPLES
 ;;
+;;
+;; 아래 예제들 통해서 lisp 을 익힌다.
 
 ;; lists 선언
 (defvar lists
