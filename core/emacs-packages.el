@@ -179,13 +179,17 @@
 ;; 아래 구문은 실행되어지면 바로 package 목록이 보여지기 때문에 주석처리 한다.
 ;;(package-show-package-list (set-difference package-activated-list emacs-packages))
 
+;;(package-show-package-list)
+
+
+
+
+
 
 ;;
 ;; LISP EXAMPLES
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 
 
 (provide 'emacs-packages)

@@ -83,10 +83,11 @@
 (require 'emacs-packages)
 
 
-;; the modules
+;; load modules file (~/.emacs.d/modules/emacs-modules.el)
 (if (file-exists-p emacs-modules-file)
     (load emacs-modules-file)
   (message "Missing modules file %s" emacs-modules-file))
+
 
 
 
@@ -95,12 +96,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit autopair))))
+ '(custom-safe-themes
+   (quote
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "afbb40954f67924d3153f27b6d3399df221b2050f2a72eb2cfa8d29ca783c5a8" default)))
+ '(package-selected-packages
+   (quote
+    (solarized-theme zenburn-theme guru-mode magit autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(put 'erase-buffer 'disabled nil)

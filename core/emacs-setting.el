@@ -187,6 +187,13 @@
 
 
 
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+
+
 (provide 'emacs-setting)
 ;;; emacs-setting.el ends here
 
