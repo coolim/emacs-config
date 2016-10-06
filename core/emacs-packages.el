@@ -79,25 +79,50 @@
       (message "%s" "success great")
     (message "%s" "failed fuck")))
 
-
-;;memq 는 emacs-packages 에 목록에 package 라는 것이 없으면 return 한다.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; LISP EXAMPLES
 ;;
 
-;;(memq package emacs-packages)
-
-
-(defvar testlists
+;; lists 선언
+(defvar lists
   '(
     autopair
     )
   "설치할 패키지 목록들이다.")
 
 
+;; (memq package emacs-packages)
+;; memq 는 emacs-packages 에 목록에 package 라는 것이 없으면 return 한다.
+;; magit 가 lists 에 없으면 lists 에 magit 를 추가한다.
+(unless (memq 'magit lists)
+  (add-to-list 'lists 'magit))
+;; (magit autopair)
 
-(add-to-list 'testlists 'magit)
+(defun temp-installed-package (package)
+  "package 가 설치되어 있는지 아닌지 판별한다."
+  (message "package name : %s" package)
+  (if (package-installed-p package)             ;; condition
+      (message "Already installed %s" package)  ;; true
+    (message "not installed")))                 ;; false
+
+
+;; (mapc FUNCTION SEQUENCE)
+;; mapc 는 함수는 SEQUENCE 의 목록을 FUNCTION의 파라미터로 받아들인다.
+;; return 값은 목록이다.
+
+(mapc #'temp-installed-package lists)
+
+;; (every PREDICATE SEQ...)
+;; every 는 mapc 와 동일하지만 return 값이 t or nil 이다.
+
+(every #'temp-installed-package lists)
 
 
 
 
 (provide 'emacs-packages)
 ;;; emacs-packages.el ends here
+
+
+
