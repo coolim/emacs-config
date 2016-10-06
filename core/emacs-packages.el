@@ -33,7 +33,7 @@
 
 
 
-;; 설치할 목록
+;; 설치할 목록들이다.
 (defvar emacs-packages
   '(
     autopair
@@ -43,43 +43,60 @@
 ;;; 패키지 인스톨을 실행한다고 바로 설치가 되는것이 아니다.
 ;;; package-refresh-contents 를 통해 refresh 를 하고 package-install 명령을 내려야 한다.
 
-(unless (package-installed-p 'autopair)
-  (package-refresh-contents)
-  (package-install 'autopair)
-  (message "not installed autopair"))
+;; autopair 가 설치되어 있지 않다면 설치한다.
+;; (unless (package-installed-p 'autopair)
+;;   (package-refresh-contents)
+;;   (package-install 'autopair)
+;;   (message "autopair-mode done."))
+
+
+;; autopair 가 설치되어 있다면 message 가 나온다.
+;; (when (package-installed-p 'autopair)
+;;   (message "autopair installed"))
+
 
 
 ;; 현재 emacs-packages 목록에 있는 패키지가 설치되어져 있는지 확인한다.
-(unless (package-installed-p emacs-packages)
-  (message "not installed emacs-packages"))
-
-
-(when (package-installed-p 'autopair)
-  (message "autopair installed"))
-
-
 ;; cl에 있는 함수이다. emacs-packages 에 있는 리스트 목록에서 하나씩 가져와서 package-installed-p 를 체크한다.
 ;; 그 중에 하나가 오류가 생기면 바로 리턴되어진다.
 (defun emacs-packages-installed-p ()
-  "Check if all packages in `emacs-packages' are installed."
+  "Check if all pakcages in `emacs-packages' are installed"
   (every #'package-installed-p emacs-packages))
 
-
+;;; emacs-packaged 목록에 있는 것중에 하나라도 설치되어 있지 않다면
 (unless (emacs-packages-installed-p)
-  (message "failed"))
+  (message "%s" "fucking not installed"))
 
-;; ;; ==================================
-;; ;; autopair
-;; ;; ==================================
-;; (require 'autopair)
-;; (autopair-global-mode 1)
-;; (setq autopair-autowrap t)
+;;; emacs-packaged 목록에 있는 것이 전부 설치 되어 있다면 
+(when (emacs-packages-installed-p)
+  (message "%s" "all installed. Good Job :D"))
+
+
+(defun emacs-packages-install-query ()
+  "`emacs-packages' 가 설치 되어 있는가?"
+  (interactive)
+  (if (emacs-packages-installed-p)
+      (message "%s" "success great")
+    (message "%s" "failed fuck")))
 
 
 ;;memq 는 emacs-packages 에 목록에 package 라는 것이 없으면 return 한다.
 ;;
 
 ;;(memq package emacs-packages)
+
+
+(defvar testlists
+  '(
+    autopair
+    )
+  "설치할 패키지 목록들이다.")
+
+
+
+(add-to-list 'testlists 'magit)
+
+
 
 
 (provide 'emacs-packages)

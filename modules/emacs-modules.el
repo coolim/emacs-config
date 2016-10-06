@@ -2,8 +2,8 @@
 ;; 사용하고 싶은것만 사용하자.
 
 
-;;(require 'emacs-autopair)
-;;(require 'emacs-ido)
+(require 'emacs-autopair)
+;; (require 'emacs-ido)
 ;;
 ;;
 ;;
