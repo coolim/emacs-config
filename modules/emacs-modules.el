@@ -4,13 +4,16 @@
 
 
 (require 'emacs-autopair)
+
 (require 'emacs-ido)
+
 ;;(require 'emacs-actionscript)
+
 (require 'emacs-window-number)
+
 (require 'emacs-theme)
+
 (require 'emacs-registers)
-
-
 
 (require 'emacs-dummy)
 

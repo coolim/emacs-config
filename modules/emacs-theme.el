@@ -27,8 +27,13 @@
 ;; (load-theme 'badger)
 ;; (load-theme 'deeper-blue)
 ;;(load-theme 'misterioso)
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 
+(when (eq system-type 'gnu/linux)
+  (load-theme 'zenburn t))
+
+;; (when (eq system-type 'darwin)
+;;   (load-theme 'zenburn t))
 
 (provide 'emacs-theme)
 ;;; emacs-theme.el ends here

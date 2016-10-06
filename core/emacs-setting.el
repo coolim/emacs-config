@@ -160,6 +160,7 @@
 ;; (global-set-key [f11] 'toggle-fullscreen)
 ;; (global-set-key "\C-cwf" 'toggle-fullscreen)
 
+
 (defun fullscreen (&optional f)
       (interactive)
       (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
@@ -171,9 +172,8 @@
   (global-set-key "\C-cwm" 'fullscreen))
 
 
-(ido-mode t)
-
-
+(when (eq window-system 'ns)
+  (global-set-key "\C-cwm" 'toggle-frame-maximized))
 
 
 ;; scratch buffer를 죽여도 계속 살리는 것인데
