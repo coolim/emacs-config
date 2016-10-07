@@ -230,8 +230,13 @@
 ;; (setq-default save-place t)
 
 ;; Emacs 25.1 and newwer versions
-(save-place-mode 1) 
+;; (save-place-mode 1)
 
+(if (version< "25.1" emacs-version)
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
 
 
 
