@@ -220,6 +220,19 @@
   (setq mac-option-modifier nil))
 
 
+;; ==================================
+;; saveplace
+;; ==================================
+;; 마지막 커서 위치 저장을 한다.
+;; 파일을 다시 열면 이전위치로 자동이동한다.
+;; Emacs 24.5 and older versions
+;; (require 'saveplace)
+;; (setq-default save-place t)
+
+;; Emacs 25.1 and newwer versions
+(save-place-mode 1) 
+
+
 
 
 (provide 'emacs-setting)

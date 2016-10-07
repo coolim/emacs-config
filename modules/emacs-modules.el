@@ -17,4 +17,6 @@
 
 (require 'emacs-dummy)
 
+(require 'emacs-lusty)
+
 ;;; emacs-modules.el ends here
