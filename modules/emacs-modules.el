@@ -19,4 +19,8 @@
 
 (require 'emacs-lusty)
 
+(require 'emacs-php)
+
+(require 'emacs-helm)
+
 ;;; emacs-modules.el ends here
