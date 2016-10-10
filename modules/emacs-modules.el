@@ -3,11 +3,13 @@
 ;; 사용하고 싶은것만 사용하자.
 
 
+;; file format highlight
+(require 'emacs-modes)
+
 (require 'emacs-autopair)
 
 (require 'emacs-ido)
 
-;;(require 'emacs-actionscript)
 ;;(require 'emacs-yasnippet)
 
 (require 'emacs-window-number)
@@ -28,5 +30,7 @@
 (require 'emacs-company)
 
 (require 'emacs-redo)
+
+(require 'emacs-vcs)
 
 ;;; emacs-modules.el ends here
