@@ -51,6 +51,11 @@
   "emacs-modules file.")
 
 
+(defvar emacs-custom-file (expand-file-name "emacs-custom.el" emacs-savefile-dir)
+  "emacs-modules file.")
+
+
+
 ;; savefile directory 가 없으면 만든다.
 (unless (file-exists-p emacs-savefile-dir)
   (make-directory emacs-savefile-dir))
@@ -89,22 +94,15 @@
   (message "Missing modules file %s" emacs-modules-file))
 
 
+;; init.el 에 자꾸 custom-set-variables 가 생기기 때문에 git 버전 관리가 되지 않고 있다.
+;; 이 부분을 custom-file 로 지정해서 (~/emacs.d/savefile/emacs-custom.el) 따로 관리한다.
+;; savefile 은 git ignore directory 이기 때문에 편하다.
+;; emacs-custom-file 이 존재한다면 load 한다.
+(setq custom-file emacs-custom-file)
+(if (file-exists-p emacs-custom-file)
+    (load emacs-custom-file)
+  (message "Not Create %s file" emacs-custom-file))
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "afbb40954f67924d3153f27b6d3399df221b2050f2a72eb2cfa8d29ca783c5a8" default)))
- '(package-selected-packages
-   (quote
-    (solarized-theme zenburn-theme guru-mode magit autopair))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+
