@@ -8,6 +8,7 @@
 (require 'emacs-ido)
 
 ;;(require 'emacs-actionscript)
+;;(require 'emacs-yasnippet)
 
 (require 'emacs-window-number)
 
@@ -22,5 +23,10 @@
 (require 'emacs-php)
 
 (require 'emacs-helm)
+
+;; 자동 완성 팝업을 사용한다.
+(require 'emacs-company)
+
+(require 'emacs-redo)
 
 ;;; emacs-modules.el ends here
