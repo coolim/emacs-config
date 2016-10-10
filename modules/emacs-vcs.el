@@ -1,7 +1,7 @@
 ;;; emacs-vcs.el --- emacs-vcs configuration
 ;;; Copyright (C) 2016 by KudzuValley
 
-(emacs-require-packages '(psvn))
+(emacs-require-packages '(psvn magit))
 ;; ================================================================================
 ;; psvn
 ;; ================================================================================

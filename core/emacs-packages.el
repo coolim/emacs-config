@@ -37,7 +37,6 @@
 (defvar emacs-packages
   '(
     autopair
-    magit
     )
   "설치할 패키지 목록들이다.")
 

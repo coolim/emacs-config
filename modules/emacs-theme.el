@@ -29,8 +29,65 @@
 ;;(load-theme 'misterioso)
 ;; (load-theme 'zenburn t)
 
+
+
+;; (defconst emacs-theme-lists
+;;   '((load-theme 'solarized-dark t)
+;;     (load-theme 'zenburn t)))
+
+;; (when (eq system-type 'gnu/linux)
+;;   (eval (nth (random (length emacs-theme-lists)) emacs-theme-lists)))
+
+
+
+(defconst emacs-theme-lists2
+  '(
+  (load-theme 'adwaita t) 
+  (load-theme 'deeper-blue t) 
+  (load-theme 'dichromacy t) 
+  (load-theme 'leuven t) 
+  (load-theme 'light-blue t) 
+  (load-theme 'manoj-dark t) 
+  (load-theme 'misterioso t) 
+  (load-theme 'solarized-dark t) 
+  (load-theme 'solarized-light t) 
+  (load-theme 'tango t) 
+  (load-theme 'tango-dark t) 
+  (load-theme 'tsdh-dark t) 
+  (load-theme 'tsdh-light t) 
+  (load-theme 'wheatgrass t) 
+  (load-theme 'whiteboard t) 
+  (load-theme 'wombat t) 
+  (load-theme 'zenburn t)))
+
+
 (when (eq system-type 'gnu/linux)
-  (load-theme 'zenburn t))
+  (eval (nth (random (length emacs-theme-lists2)) emacs-theme-lists2)))
+
+;; adwaita
+;; deeper-blue
+;; dichromacy
+;; leuven
+;; light-blue
+;; manoj-dark
+;; misterioso
+;; solarized-dark
+;; solarized-light
+;; tango
+;; tango-dark
+;; tsdh-dark
+;; tsdh-light
+;; wheatgrass
+;; whiteboard
+;; wombat
+;; zenburn
+
+
+
+
+
+;; (when (eq system-type 'gnu/linux)
+;;   (load-theme 'zenburn t))
 
 ;; (when (eq system-type 'darwin)
 ;;   (load-theme 'zenburn t))
