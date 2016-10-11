@@ -1,14 +1,7 @@
 ;;; emacs-setting.el --- Emacs default package selection.
 ;;; Copyright (C) 2016 by KudzuValley
 
-(global-set-key "\C-c\C-f" 'grep-find)
-;; 아래 것으로 grep-find 사용해 보자. 
-;;; Grep is wicked
-;; Grep/Find.  This needs some cleanup
-(setq grep-command "grep -Irine ")
-(setq grep-find-command
-      (format "%s . -type f \\( -name '*~' -o -name '*#' -o -name '*.log' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
-              find-program grep-command))
+
 
 ;; remove emacs init window
 (setq inhibit-startup-message t)
@@ -19,6 +12,13 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;; get rid of menu-bar
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;;ido 나 helm 을 사용중이기 때문에 필요없다.
+;;기본적으로는 괜찮은 mode이다.
+;;(icomplete-mode 1)
+
+;; get rid of icomplete
+(if (fboundp 'icomplete-mode) (icomplete-mode -1))
 
 
 ;; emacs 종료시 물어보고 'y' 입력시 종료한다.
@@ -31,20 +31,15 @@
 (setq default-korean-keyboard "3f") ;; 3벌식 최종
 (setq default-input-method "korean-hangul3f")
 
-;; Shift + Space  한영 전환키 설정한다.
-(define-key global-map (kbd "S-SPC") 'toggle-input-method)
-;; (global-set-key [?\S- ] 'toggle-input-method) ;; S-SPC
-
-;; 상위 디렉토리를 갈 때 단축키 설정
-(global-set-key [?\C-,] 'dired-up-directory)
 
 ;; Show matching parens
 (show-paren-mode 1)
 
 
+;; yes, no 등을 간단하게 y 나 n 로 바꾼다.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(icomplete-mode)
+
 
 (setq make-backup-files nil)
 
@@ -234,6 +229,16 @@
       (require 'saveplace)
       (setq-default save-place t))
   (save-place-mode 1))
+
+
+;; 아래 것으로 grep-find 사용해 보자. 
+;;; Grep is wicked
+;; Grep/Find.  This needs some cleanup
+(setq grep-command "grep -Irine ")
+(setq grep-find-command
+      (format "%s . -type f \\( -name '*~' -o -name '*#' -o -name '*.log' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
+              find-program grep-command))
+
 
 
 
