@@ -1,6 +1,13 @@
 ;;; emacs-cscope.el --- emacs-cscope configuration
 ;;; Copyright (C) 2016 by KudzuValley
 
+(emacs-require-packages '(xcscope))
+
+(when (eq system-type 'gnu/linux)
+  (unless (executable-find "cscope")
+    (warn "Maybe You need cscope, \"sudo apt-get install cscope\"")))
+
+
 ;; ==================================
 ;; cscope 
 ;; ==================================

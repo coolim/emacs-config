@@ -33,4 +33,8 @@
 
 (require 'emacs-vcs)
 
+(require 'emacs-org)
+
+(require 'emacs-cscope)
+
 ;;; emacs-modules.el ends here
