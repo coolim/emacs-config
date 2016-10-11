@@ -1,6 +1,9 @@
 ;;; emacs-web.el --- emacs-web configuration
 ;;; Copyright (C) 2016 by KudzuValley
 
+
+(emacs-require-packages '(web-mode))
+
 ;; ==================================
 ;; web-mode
 ;; ==================================
@@ -13,6 +16,9 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.blade\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("/\\(views\\|html\\|theme\\|templates\\)/.*\\.php\\'" . web-mode))
+
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
@@ -27,6 +33,34 @@
   (setq web-mode-enable-css-colorization t)  
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+
+;; make web-mode play nice with smartparens
+;; (setq web-mode-enable-auto-pairing nil)
+
+
+;; 이건또 뭐하는건가?
+;; (sp-with-modes '(web-mode)
+;;   (sp-local-pair "%" "%"
+;;                  :unless '(sp-in-string-p)
+;;                  :post-handlers '(((lambda (&rest _ignored)
+;;                                      (just-one-space)
+;;                                      (save-excursion (insert " ")))
+;;                                    "SPC" "=" "#")))
+;;   (sp-local-tag "%" "<% "  " %>")
+;;   (sp-local-tag "=" "<%= " " %>")
+;;   (sp-local-tag "#" "<%# " " %>"))
+
+
+;; 아래는 뭐하는건지??? 나중에 보자.
+;; (eval-after-load 'web-mode
+;;   '(progn
+;;      (defun prelude-web-mode-defaults ())
+;;      (setq prelude-web-mode-hook 'prelude-web-mode-defaults)
+
+;;      (add-hook 'web-mode-hook (lambda ()
+;;                                 (run-hooks 'prelude-web-mode-hook)))))
+
 
 
 

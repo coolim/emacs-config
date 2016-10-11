@@ -1,5 +1,6 @@
 ;;; emacs-setting.el --- Emacs default package selection.
-;;; 임시로 작성한다.
+;;; Copyright (C) 2016 by KudzuValley
+
 (global-set-key "\C-c\C-f" 'grep-find)
 ;; 아래 것으로 grep-find 사용해 보자. 
 ;;; Grep is wicked
@@ -214,10 +215,6 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
-
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil))
 
 
 ;; ==================================

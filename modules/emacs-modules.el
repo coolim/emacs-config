@@ -37,4 +37,6 @@
 
 (require 'emacs-cscope)
 
+(require 'emacs-web)
+
 ;;; emacs-modules.el ends here

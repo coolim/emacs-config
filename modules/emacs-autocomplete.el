@@ -1,6 +1,9 @@
 ;;; emacs-autocomplete.el --- emacs-autocomplete configuration
 ;;; Copyright (C) 2016 by KudzuValley
 
+
+(emacs-require-packages '(auto-complete))
+
 ;; ==================================
 ;; auto-complete
 ;; ==================================

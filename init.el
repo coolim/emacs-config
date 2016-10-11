@@ -84,8 +84,11 @@
 ;; warn when opening files bigger than 100MB (default 10MB)
 (setq large-file-warning-threshold 100000000)
 
-(require 'emacs-setting)
 (require 'emacs-packages)
+(require 'emacs-setting)
+
+(when (eq system-type 'darwin)
+  (require 'emacs-osx))
 
 
 ;; load modules file (~/.emacs.d/modules/emacs-modules.el)
