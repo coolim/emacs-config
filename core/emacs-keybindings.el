@@ -14,8 +14,5 @@
 (global-set-key [?\C-,] 'dired-up-directory)
 
 
-
-
-
 (provide 'emacs-keybindings)
 ;;; emacs-keybindings.el ends here

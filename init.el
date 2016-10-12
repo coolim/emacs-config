@@ -73,19 +73,12 @@
 (add-to-list 'load-path emacs-core-dir)
 (add-to-list 'load-path emacs-modules-dir)
 
-;; 기본적으로 가비지 콜렉션을 실행하기 위한 사이즈를 늘린다.
-;; 이러면 lisp을 실행하는 로딩시간이 짧아진다.
-;; reduce the frequency of garbage collection by making it happen on
-;; each 50MB of allocated data (the default is on every 0.76MB)
-(setq gc-cons-threshold 50000000)
-;; (setq garbage-collection-messages t)
-
-;; 용량이 큰 파일을 열 때 물어본다. 이것을 100MB 로 설정한다.
-;; warn when opening files bigger than 100MB (default 10MB)
-(setq large-file-warning-threshold 100000000)
 
 (require 'emacs-packages)
 (require 'emacs-setting)
+(require 'emacs-keybindings)
+(require 'emacs-font)
+(require 'emacs-programming)
 
 (when (eq system-type 'darwin)
   (require 'emacs-osx))
@@ -102,9 +95,9 @@
 ;; savefile 은 git ignore directory 이기 때문에 편하다.
 ;; emacs-custom-file 이 존재한다면 load 한다.
 (setq custom-file emacs-custom-file)
-(if (file-exists-p emacs-custom-file)
-    (load emacs-custom-file)
-  (message "Not Create %s file" emacs-custom-file))
+(when (file-exists-p emacs-custom-file)
+  (load emacs-custom-file))
+
 
 
 

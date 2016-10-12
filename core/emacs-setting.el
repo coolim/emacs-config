@@ -40,68 +40,178 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
+;; ================================================================================
+;;; Enable functions that are disabled by default
+;; ================================================================================
+;; Enable the command `narrow-to-region' ("C-x n n"), a useful
+;; command, but possibly confusing to a new user, so it's disabled by default.
 
+;; Restrict buffer editing to a region
+(put 'narrow-to-region 'disabled nil)
+(put 'erase-buffer 'disabled nil)
+
+;; Upcase and downcase regions
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; Sets the current horizontal position for C-n and C-p
+(put 'set-goal-column 'disabled nil)
+
+;; Dired functions
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; narrow-to-region	C-x n n
+;; narrow-to-page	C-x n p
+;; narrow-to-defun	C-x n d
+;; everything	widen	C-x n w
+
+
+;; ================================================================================
+;; 바뀐 부분이 있으면 자동으로 reload를 해 준다.
+;; ================================================================================
+(global-auto-revert-mode 1)
+
+;; ================================================================================
+;; 아래 행과 열이 표시된다.
+;; ================================================================================
+(column-number-mode t)
+
+;; ================================================================================
+;; 아래 시간이 표시된다.
+;; ================================================================================
+;;(display-time-mode t)
+
+;; display time format
+(setq display-time-day-and-date t
+      display-time-24hr-format t
+      display-time-use-mail-icon t
+      display-time-mail-file nil)
+
+;; display time 
+(display-time)
+
+
+;; ================================================================================
+;; 아래 줄과 칸이 표시된다.
+;; ================================================================================
+(line-number-mode t)
+
+;; ================================================================================
+;; 현재 커서의 함수명을 표시한다.
+;; ================================================================================
+;; 아래 함수 때문에 grep 을 하면 문제가 발생을 한다. 로딩이 잘 되지 않는다.
+;; 나중에 다시 확인해 보자.
+(which-function-mode t)
+
+;; ================================================================================
+;; 이미지 파일을 볼 수 있게 해 준다.
+(auto-image-file-mode t)
+;; ================================================================================
+
+;; ================================================================================
+;; 압축파일을 볼 수 있게 해 준다.
+;; ================================================================================
+;; Automatic opening of zipped files.
+(auto-compression-mode t)
+
+;; ================================================================================
+;; no beep sound
+;; ================================================================================
+(setq visible-bell t)
+
+
+;; ================================================================================
+;; 선택된 영역을 C-d 를 이용해서 지우기 위한 설정이다.
+;; ================================================================================
+;; delete it by typing the BS(DEL).
+(delete-selection-mode t)
+
+;; ================================================================================
+;; TEXT 라인이 넘어도 자동으로 줄바꿈을 하지 않고 그대로 보여준다.
+;; ================================================================================
+(setq-default truncate-lines t)
+
+
+;; ================================================================================
+;; EMACS 상단의 제목에 현재 파일이름을 보여준다.
+;; ================================================================================
+(setq frame-title-format (list '(buffer-file-name "%f" "%b")))
+(setq icon-title-format frame-title-format)
+
+
+
+;; ================================================================================
+;; backup 
+;; ================================================================================
+;; 현재는 사용하지 않는다.
 (setq make-backup-files nil)
 
-;; ************************************************************
-;;        F O N T S   S E T T I N G   M O D E
-;; ************************************************************
-(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                  '("NanumGothicOTF" . "iso10646-1"))
-(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-                  '("NanumGothicOTF" . "iso10646-1"))
-(set-fontset-font "fontset-default" 'kana
-                  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-(set-fontset-font "fontset-default" 'han
-                  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-(set-fontset-font "fontset-default" 'japanese-jisx0208
-                  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-(set-fontset-font "fontset-default" 'katakana-jisx0201
-                  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+;; (setq make-backup-files t   ; do make backups
+;;       backup-directory-alist '(("." . "~/.emacs.d/.emacs_backup/"))
+;;       version-control t                      ; 백업을 여러번 한다
+;;       kept-old-versions 10                    ; oldest 백업 10개는 유지
+;;       kept-new-versions 10                    ; newest 백업 10개 유지
+;;       delete-old-versions t)                 ; 지울때마다 묻지 않는다.
 
-(when (eq system-type 'gnu/linux)
-  ;; default Latin font (e.g. Consolas)
-  ;; but I use Monaco 
-  (set-face-attribute 'default nil :family "Consolas")
 
-  ;; default font size (point * 10)
-  ;;
-  ;; WARNING!  Depending on the default font,
-  ;; if the size is not supported very well, the frame will be clipped
-  ;; so that the beginning of the buffer may not be visible correctly. 
-  (set-face-attribute 'default nil :height 130)
-  ;;(set-face-attribute 'default nil :weight 'bold)
 
-  ;; use specific font for Korean charset.
-  ;; if you want to use different font size for specific charset,
-  ;; add :size POINT-SIZE in the font-spec.
-  ;;(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-  ;;(set-fontset-font t 'hangul (font-spec :name "나눔바른고딕" :size 20))
-  (set-fontset-font t 'hangul (font-spec :name "나눔바른고딕"))
-  ;; you may want to add different for other charset in this way.
-  )
+;; ================================================================================
+;; 인코딩 설정
+;; ================================================================================
+(setq default-buffer-file-coding-system 'utf-8-unix)
+(setq default-file-name-coding-system 'utf-8-unix) 
+(setq default-keyboard-coding-system 'utf-8-unix) 
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+(setq default-sendmail-coding-system 'utf-8-unix)
+(setq default-terminal-coding-system 'utf-8-unix)
 
-(when (eq system-type 'darwin)
-  ;; default Latin font (e.g. Consolas)
-  ;; but I use Monaco
-  (message "MAC System")
-  (set-face-attribute 'default nil :family "Monaco")
 
-  ;; default font size (point * 10)
-  ;;
-  ;; WARNING!  Depending on the default font,
-  ;; if the size is not supported very well, the frame will be clipped
-  ;; so that the beginning of the buffer may not be visible correctly. 
-  (set-face-attribute 'default nil :height 130)
+;; kill ring max 값 설정 기본은 60이다.
+(setq kill-ring-max 1024)
 
-  ;; use specific font for Korean charset.
-  ;; if you want to use different font size for specific charset,
-  ;; add :size POINT-SIZE in the font-spec.
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+;; for lisp nesting exceeds error
+;; maybye emacs default 400
+;; ntemacs default 1000
+;; lisp 최대 실행 깊이 default 는 500
+;; 몰까?
+(setq max-lisp-eval-depth 40000) 
 
-  ;; you may want to add different for other charset in this way.
-  )
+;; 최대 용량 default 1000
+;; 무엇에 대한 최대 용량인지 모른다?? 
+(setq max-specpdl-size 10000)
 
+;; 버퍼 용량을 120M 로 정의했다.
+;; 용량이 작으면 계속 warning error 가 발생을 한다.
+;; default 는 12M 이다.
+(setq undo-outer-limit 1200000000)
+
+
+;; 기본적으로 가비지 콜렉션을 실행하기 위한 사이즈를 늘린다.
+;; 이러면 lisp을 실행하는 로딩시간이 짧아진다.
+;; reduce the frequency of garbage collection by making it happen on
+;; each 50MB of allocated data (the default is on every 0.76MB)
+(setq gc-cons-threshold 50000000)
+;; (setq garbage-collection-messages t)
+
+
+
+;; 용량이 큰 파일을 열 때 물어본다. 이것을 100MB 로 설정한다.
+;; warn when opening files bigger than 100MB (default 10MB)
+(setq large-file-warning-threshold 100000000)
+
+
+
+
+;; ================================================================================
+;; dired 모드에서의 파일 표시방식을 정한다.
+;; ================================================================================
+;;;;; dired-mode 의 기본 옵션은 ls -la 과 동일하다.
+;;;;; 이걸 변경하고 싶으면 C-u s 를 해 보면
+;;;;; -al 과 갈이 되어 있을 것이다. 이것을 변경을 하면 된다.
+;; (setq dired-listing-switches "-aBhl  --group-directories-first")
+;; (setq dired-listing-switches "-aBlgh")
+;;(setq dired-listing-switches "-Blh")
+(setq dired-listing-switches "-Blha")
 
 
 ;; ================================================================================
@@ -198,18 +308,17 @@
   nil)
 
 
-;; =======================================
-;; magit
-;; =======================================
-(global-set-key "\C-xg" 'magit-status)
+;;; emacs 에서는 scroll down 중에 커서가 맨 밑으로 가면 다시 중간으로 온다.
+;;; 이 기능이 있으면 불편해서 없앤다.
 
 
-
-;; nice scrolling
+;; smooth scrolling
 (setq scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
+; scroll just one line when hitting the bottom of the window center
+(setq scroll-step 1)
 
 
 ;; ==================================
