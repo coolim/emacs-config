@@ -98,3 +98,58 @@
 
 
 
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  emacs-lisp study
+;;
+;; C-x C-e를 하면 간단한 결과를 얻을 수 있다.
+;; 
+;; (buffer-file-name)
+;; 현재 버퍼의 파일 이름을 알려준다. (path 포함해서)
+;;
+;; (file-name-sans-extension buffer-file-name)
+;; 현재 버퍼의 파일이름을 확장자를 빼고 알려준다. (path 포함해서)
+;; 
+;; (file-name-nondirectory buffer-file-name)
+;; 현재 버퍼의 파일 이름을 알려준다. (path를 포함하지 않는 순수 파일이름만 알려준다.)
+;;
+;; (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))
+;; path가 포함되지 않은 순수파일에서 확장자를 뺀다. 이러면 바로 순수 파일이름만 얻을 수 있다.
+;;
+;;(file-name-extension (buffer-file-name))
+;;확장자만 얻을 있다.
+;;
+;;
+;; (file-name (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))
+;; 확장자를 뺀 순수파일이름만 file-name이라는 변수에 저장을 한다.
+;; (file-ext (file-name-extension (buffer-file-name)))
+;; 파일 확장자만 file-ext에 저장을 한다.
+;; 위에서 let이라는 함수를 사용해 먼저 변수를 저장하고 있어야 한다.
+ 
+;; (concat "javac -g "
+;;         (file-name-nondirectory 
+;;          (buffer-file-name))))))
+;; concat은 두개의 문자열을 하나로 만든다.
+;; 결과는 "javac -g filename" 이 될것이다.
+;;
+;; eval-buffer  : Execute the current buffer as Lisp code.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+(defun debug-msg (fmt &rest args)
+  "Show a build message."
+  (if noninteractive
+      (princ (apply 'format fmt args) t)
+    (switch-to-buffer "*madman93 debug log*" t)
+    (goto-char (point-max))
+    (insert (apply 'format fmt args))
+    (sit-for 0)))
+ 
+;;; example
+;; (debug-msg "CEDET BYTE COMPILATION STATUS:\n\n")
+

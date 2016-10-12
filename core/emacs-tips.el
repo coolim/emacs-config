@@ -526,6 +526,243 @@
 
 
 
+;; (autoload 'function "filename")
+;; 함수와 함수를 구현한 패키지를 연결하여 함수가 처음으로 실행될 때 패키지로부터 코드를 읽어들일 수 있도록 한다.
+
+;; copyright 삽입
+;; M-x copyright
+;; copyright 삽입
+;; M-x copyright-update
+;; copyright update 현재 연도 추가
+
+
+
+;; 정규식 도우미
+
+;;  M-x re-builder
+;; 으.. 없는게 없다. vim 과 정규식이 너무 달라서 혼동스러운데, 이걸 찾아서 다행이다.
+;; 정규식을 어떻게 할지 도와준다.. 일단 실행해 보면 안다.
+
+
+;;;;; 정규표현식으로 찾는 표현식 가운데 
+;; M-x re-builder가 있고 M-x isearch-forward-regexp가 있다.
+;; 두개가 다 좋은 방식이다. 바로 하고 싶으면 
+;; C-M-s 가 isearch-forward-regexp이다.
+
+
+
+;; occur buffer
+ 
+;; M-x occur
+;; M-x grep 과 유사한데, 파일 대상이 아니고 현재 버퍼를 대상으로 한다. 
+;; vim 에서는 이런걸 써본적이 없는데.. 알아두면 쓸곳이 있을것 같아서 적어둔다. 
+;; 여러가지로 응용할수가 있는데, http://www.emacswiki.org/cgi-bin/wiki/OccurBuffer 를 봐두자.
+
+
+;; 현재 포인트(커서) 아래의 정보 보기
+;; C-x =
+;; what-cursor-position 
+
+
+
+
+;; 이전 수정하던 곳으로 돌아가기
+;; C-u C-SPC
+;; 이전 set-mark 위치로 pop 하기
+;; 이건 일종의 편법(?)인데... C-SPC 는 region 을 잡기 위한 명령이지만 
+;; C-u prefix 를 넣어주면 바로 이전에 set-mark 가 된곳으로 돌아가게 된다. 
+;; 이 set-mark 는 스택구조로.. C-u C-SPC 를 할때마다 pop 된다.
+
+
+
+;;; cwarn-mode는 Emacs로 C/C++ 프로그램을 작성할 때, 
+;;; 에러가 의심되는 부분을 강조해서 보여주는 기능을 하는 minor mode입니다.
+;;; 여기서 에러가 의심되는 부분이란, 조건식 내에 ==가 아니라 =가 쓰인 경우 등을 이야기합니다.
+;;; M-x cwarn-mode
+;;; .emacs 파일에 다음 내용을 추가하면 이 기능이 기본적으로 활성화됩니다.
+ 
+;; (global-cwarn-mode t)
+
+
+;;; 이맥스에는 show-trailing-whitespace라는 변수가 존재합니다.
+;;; 일반적으로 공백은 눈에 보이지 않기 때문에, 줄 끝에 공백이 있는지 
+;;; 확인하기 어렵지만, 이 변수에 nil이 아닌 값을 설정하면, 
+;;; 줄 끝에 나타나는 공백을 눈으로 볼 수 있습니다.
+ 
+;;; 이맥스 설정 파일인 .emacs 파일에 다음 내용을 추가하여, 
+;;; 이 기능을 기본적으로 활성화시킬 수도 있습니다. (추천 안함)
+ 
+;;; (setq-default show-trailing-whitespace t)
+ 
+;;; 그리고 줄 끝에 나타나는 이러한 공백들은 
+;;; delete-trailing-whitespace 명령으로 한꺼번에 제거할 수 있습니다.
+ 
+;;; M-x delete-trailing-whitespace
+
+;;;;;;; FlyMake Mode;;;;;;;;;;;;
+ 
+;; 일단 Makefile을 만들어서 check-syntax라는 구문을 만든다.
+;;;; Makefile
+;; -------------------------------------------
+;; # flaymake requires the following target
+;;
+;; check-syntax:
+;;  gcc -o nul -Wall -S $(CHK_SOURCES)
+;;
+;; # Don't misspell
+;;
+;; sample:
+;;  gcc -o sample sample.c
+;;--------------------------------------------
+;; sample.c라는 파일에서 flymake-mode를 설정하고
+;; 코딩을 하면 실시간으로 warning이나
+;; error을 알려준다.
+
+
+(defun flymake-compile()
+    "kill all flymake syntax checks, start compilation"
+    (interactive)
+    (flymake-stop-all-syntax-checks)
+    (call-interactively 'compile))
+
+
+;;; tramp mode
+
+;; tramp 이용한 sudo 사용법 
+;; /sudo::/etc/php5/
+
+
+;; (require 'tramp)
+;; ;;(add-to-list 'load-path "~/.emacs.d/tramp-2.1.9/lisp")
+;; (setq tramp-debug-buffer t)
+;; (setq tramp-verbose 10)
+;; (setq find-file-visit-truename nil)
+;; (setq tramp-default-method "sshx")
+;; (setq tramp-default-method "plink")
+
+;; (require 'tramp)
+;; (setq tramp-chunksize 500)
+;; (setq tramp-password-end-of-line "\r\n")
+;; (setq tramp-remote-sh "/bin/bash")
+;; (setq exec-path (append exec-path '("e:/utils/putty/"))
+;;       ssh-program "plink"
+;;       tramp-completion-without-shell-p t
+;;   tramp-debug-buffer t
+;;   tramp-verbose 10
+;; )
+
+;;; su ---> ssh connect-
+;;; tm ---> telnet connect
+ 
+;;Quick-Start Tramp Configuration
+;;(setq tramp-default-method "ssh")
+;;For GNU Emacs
+;;C-x C-f /remotehost:filename  RET (or /method:user@remotehost:filename)
+;; using su or sudo
+;;C-x C-f /su::/etc/hosts RET
+;;C-x C-f /sudo::/etc/hosts RET
+
+;; when u delete files and directory
+;; moving to trash
+;; (setq delete-by-moving-to-trash t)
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Emacs some tips
+;;
+;;
+;;replace <1> -> (1), <2> -> (2), <3> -> (3) usw.
+;;query-replace-regexp <\(.\)> (\1)
+;;$ gnudoit '(message "Hello from Cygwin")'
+;;C:\>gnudoit "(message \"Hello from NT\")"
+;;
+;;
+;; M-x how-many 
+;; \b\w 
+;; returns a word count from point to the end of the buffer.
+ 
+
+;;(setenv "X" "/[scp@user@host]")
+;;C-x C-f $X/path/to/file RET.
+ 
+
+;; =============== C 언어 도움될만한 키 바인딩 ====================
+ 
+;; C-c C-p         c-backward-conditional
+;; C-c C-n         c-forward-conditional
+ 
+;; #if 0
+;;  something....
+;; #endif
+ 
+;; 위에 처럼 되어 있을때 #if 0과의 짝인 #endif를 찾아 준다 자세한건
+;; 직접 해보면 느끼지요..
+ 
+ 
+ 
+;; 선택된 영역을 \ 표시로 해준다.
+;; 쓸일이 언제일지는 모르지만 알아두면 좋을것 같다.
+ 
+;; C-c C-\         c-backslash-region
+ 
+
+;; 커서가 위치해 있는 해당 함수만을 자동으로 선택되어진다.
+;; 알아두면 좋다.
+ 
+;; ESC C-h         c-mark-function
+ 
+;; 특별히 C에서 국한된것이 아닌 범용적인 키 바인딩이다.
+;; 이걸 알아두면 함수의 처음과 끝을 자유로이 왔다리 갔다리...
+ 
+;; C-M-a runs the command beginning-of-defun
+;; C-M-e runs the command end-of-defun
+ 
+
+;; Using tags in emacs on windows
+;; 1. find . -regex ".*\(h$\|cpp$\)" > files.txt
+;; 2. etags.exe - < files.txt
+;; 3. M-x visit-tags-table
+ 
+
+;;; 대문자 소문자
+ 
+;; 대문자
+;;upcase-word M-u
+;;upcase-region C-x C-u
+ 
+;; 앞자만 대문자
+;; capitalize-word  M-c
+;; capitalize-region
+ 
+;; 소문자
+;; downcase-word M-l
+;; downcase-region C-x C-l
+ 
+
+;;; removing 
+ ;; (C-q C-m) ^M (for search)
+;;; M-x replace-string or query-replace
+;;; C-q C-m equals to ^M (not ^ + M )
+;;; so just M-x replace-string 
+ ;; RET RET that's it
+ 
+;;; equal to  
+ 
+ 
+ 
+ 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;; indent가 tab 으로 되어 있는 문서를 space 로 바꾸는 방법
+;; M-x untabify
+
+
+
+
+
 
 
 

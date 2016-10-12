@@ -37,4 +37,6 @@
 
 (require 'emacs-tramp)
 
+(require 'emacs-rainbow)
+
 ;;; emacs-modules.el ends here
