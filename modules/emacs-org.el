@@ -65,7 +65,7 @@
     (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
            (path (concat dir "style.css"))
            (homestyle (or (null dir) (null (file-exists-p path))))
-           (final (if homestyle "/home/yhlim/.emacs.d/org-style.css" path)))
+           (final (if homestyle "~/.emacs.d/org-style.css" path)))
       (setq org-html-head-include-default-style nil)
       (setq org-html-head (concat
                            "<style type=\"text/css\">\n"

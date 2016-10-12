@@ -215,35 +215,59 @@
 
 
 ;; ================================================================================
-;; 선택된 영역을 C-d 를 이용해서 지우기 위한 설정이다.
+;; ALT + [Up Down Left Right]키로 창을 이동할 수 있다.
 ;; ================================================================================
-;; delete it by typing the BS(DEL).
-(delete-selection-mode t)
+(windmove-default-keybindings 'meta)
 
 
-;; ================================================================================
-;; TEXT 라인이 넘어도 자동으로 줄바꿈을 하지 않고 그대로 보여준다.
-;; ================================================================================
-(setq-default truncate-lines t)
+
+;; ==================================
+;; Smooth scroll
+;; ==================================
+;;; emacs 에서는 scroll down 중에 커서가 맨 밑으로 가면 다시 중간으로 온다.
+;;; 이 기능이 있으면 불편해서 없앤다.
+;; smooth scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+; scroll just one line when hitting the bottom of the window center
+(setq scroll-step 1)
 
 
-;; ================================================================================
-;; EMACS 상단의 제목에 현재 파일이름을 보여준다.
-;; ================================================================================
-(setq frame-title-format (list '(buffer-file-name "%f" "%b")))
-(setq icon-title-format frame-title-format)
+;; ==================================
+;; saveplace
+;; ==================================
+;; 마지막 커서 위치 저장을 한다.
+;; 파일을 다시 열면 이전위치로 자동이동한다.
+;; Emacs 24.5 and older versions
+;; (require 'saveplace)
+;; (setq-default save-place t)
+
+;; Emacs 25.1 and newwer versions
+;; (save-place-mode 1)
+
+(if (version< "25.1" emacs-version)
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
 
 
-;; ================================================================================
-;; 인코딩 설정
-;; ================================================================================
-(setq default-buffer-file-coding-system 'utf-8-unix)
-(setq default-file-name-coding-system 'utf-8-unix) 
-(setq default-keyboard-coding-system 'utf-8-unix) 
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
-(setq default-sendmail-coding-system 'utf-8-unix)
-(setq default-terminal-coding-system 'utf-8-unix)
+;; ==================================
+;; Grep Find
+;; ==================================
+;; 원래 쓰던 grep-find-command 인데 다른것으로 사용해 보자. 
+;; (setq grep-find-command
+;;       "find . -name \"*\" -not -path \"*svn*\" -not -path \"*git*\" -not -path \"*out*\" -not -name \"TAGS\" -not -name \"cscope.*\" -not -name \"*.so*\" -not -name \"*.o\" -not -name \"*.P\" -not -name \"*.d\" -not -name \"*.apk\" -not -name \"*.a\"  -type f -print0 | xargs -0 -e grep -ni -e ")
 
+;; 아래 것으로 grep-find 사용해 보자. 
+;;; Grep is wicked
+;; Grep/Find.  This needs some cleanup
+(setq grep-command "grep -Irine ")
+(setq grep-find-command
+      (format "%s . -type f \\( -name '*~' -o -name '*#' -o -name '*.log' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
+              find-program grep-command))
 
 
 ;; ===================================================================================================
@@ -282,6 +306,10 @@
   (global-set-key "\C-cwm" 'toggle-frame-maximized))
 
 
+
+;; ===================================================================================================
+;; Zombie *scratch* buffer
+;; ===================================================================================================
 ;; scratch buffer를 죽여도 계속 살리는 것인데
 ;; 나는 사용안하는 버퍼이니깐 일단 실행하지는 말자.
 ;; ;; Scratch buffer goodness
@@ -308,51 +336,14 @@
   nil)
 
 
-;;; emacs 에서는 scroll down 중에 커서가 맨 밑으로 가면 다시 중간으로 온다.
-;;; 이 기능이 있으면 불편해서 없앤다.
-
-
-;; smooth scrolling
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
-
-; scroll just one line when hitting the bottom of the window center
-(setq scroll-step 1)
-
-
-;; ==================================
-;; saveplace
-;; ==================================
-;; 마지막 커서 위치 저장을 한다.
-;; 파일을 다시 열면 이전위치로 자동이동한다.
-;; Emacs 24.5 and older versions
-;; (require 'saveplace)
-;; (setq-default save-place t)
-
-;; Emacs 25.1 and newwer versions
-;; (save-place-mode 1)
-
-(if (version< "25.1" emacs-version)
-    (progn
-      (require 'saveplace)
-      (setq-default save-place t))
-  (save-place-mode 1))
-
-
-;; 아래 것으로 grep-find 사용해 보자. 
-;;; Grep is wicked
-;; Grep/Find.  This needs some cleanup
-(setq grep-command "grep -Irine ")
-(setq grep-find-command
-      (format "%s . -type f \\( -name '*~' -o -name '*#' -o -name '*.log' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
-              find-program grep-command))
 
 
 
 
 (provide 'emacs-setting)
 ;;; emacs-setting.el ends here
+
+
 
 
 

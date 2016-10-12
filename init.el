@@ -75,10 +75,14 @@
 
 
 (require 'emacs-packages)
+(require 'emacs-function)
 (require 'emacs-setting)
 (require 'emacs-keybindings)
 (require 'emacs-font)
 (require 'emacs-programming)
+(require 'emacs-registers)
+(require 'emacs-extension) ;; file extension
+(require 'emacs-candidate) ;; emacs lisp candidate
 
 (when (eq system-type 'darwin)
   (require 'emacs-osx))

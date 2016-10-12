@@ -16,10 +16,6 @@
 
 (require 'emacs-theme)
 
-(require 'emacs-registers)
-
-(require 'emacs-dummy)
-
 (require 'emacs-lusty)
 
 (require 'emacs-php)
@@ -35,8 +31,10 @@
 
 (require 'emacs-org)
 
-(require 'emacs-cscope)
+;;(require 'emacs-cscope)
 
 (require 'emacs-web)
+
+(require 'emacs-tramp)
 
 ;;; emacs-modules.el ends here

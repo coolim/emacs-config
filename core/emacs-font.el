@@ -64,6 +64,17 @@
   ;; you may want to add different for other charset in this way.
   )
 
+;;; org 에서 한글 테이블 깨지지 않기 위해서 쓴다.  높이 비율로 크기를
+;;; 맞춰야 하는데 'Monaco' 크기가 (:height)가 130 일때 'Nanum Gothic'
+;;; 은 size 가 17 , 'NanumGothicCoding' 은 size 가 16 이어야지 비율이
+;;; 맞습니다. 실제로 적용은 face-font-rescale-alist 변수를 이용해서
+;;; 적용해 줍니다.
+;; (setq face-font-rescale-alist
+;;       '((".*hiragino.*" . 1.2)
+;;         ("NanumGothicCoding" . 1.2307692307692308)))
+
+
+
 
 
 (provide 'emacs-font)
