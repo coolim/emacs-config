@@ -763,7 +763,27 @@
 
 
 
-
+;; 아래 처럼 해서 파일의 최신 버전의 시간을 계속 stamp 하는 것도 괜찮은 방법이다.
+;;; -*- coding: utf-8 -*-
+;#####################################################################################
+; Time-stamp: <2016-10-12 15:48:29 yhlim>
+;#####################################################################################
+;;----------------------- time stamp start ------------------------------------
+;; Add Time-stamp <> or Time-stamp " " anywhere in the top 8 lines of a
+;; file to insert save date and time and user:
+;; look like one of the following:
+;;       Time-stamp: <>
+;;       Time-stamp: " "
+ 
+;; 파일의 time stamp를 알아서 찍어준다 
+;; 파일의 갱신 날짜를 알고 싶을때 쓰면 유용하다.
+;; 형식은 맨위의 줄 8줄 내에 위와 같은 형식으로만 
+;; 되어 있다면 자동으로 포맷에 맞는 날짜와 사용자를 써 넣는다.
+ 
+(add-hook 'write-file-hooks 'time-stamp)
+(setq time-stamp-active t)
+;;(setq time-stamp-format "%02d-%3b-%:y %02H:%02M:%02S %u")
+;;----------------------- time stamp end --------------------------------------
 
 
 (provide 'emacs-tips)
