@@ -135,8 +135,46 @@
 ;; ================================================================================
 ;; EMACS 상단의 제목에 현재 파일이름을 보여준다.
 ;; ================================================================================
-(setq frame-title-format (list '(buffer-file-name "%f" "%b")))
+;; A string is printed verbatim in the mode line except for %-constructs:
+;;     (%-constructs are allowed when the string is the entire mode-line-format
+;;      or when it is found in a cons-cell or a list)
+;;     %b -- print buffer name.      %f -- print visited file name.
+;;     %F -- print frame name.
+;;     %* -- print %, * or hyphen.   %+ -- print *, % or hyphen.
+;;           %& is like %*, but ignore read-only-ness.
+;;           % means buffer is read-only and * means it is modified.
+;;           For a modified read-only buffer, %* gives % and %+ gives *.
+;;     %s -- print process status.
+;;     %p -- print percent of buffer above top of window, or Top, Bot or All.
+;;     %P -- print percent of buffer above bottom of window, perhaps plus Top,
+;;           or print Bottom or All.
+;;     %m -- print the mode name.
+;;     %n -- print Narrow if appropriate.
+;;     %z -- print mnemonics of buffer, terminal, and keyboard coding systems.
+;;     %Z -- like %z, but including the end-of-line format.
+;;     %[ -- print one [ for each recursive editing level.  %] similar.
+;;     %% -- print %.   %- -- print infinitely many dashes.
+;;   Decimal digits after the % specify field width to which to pad.
+
+;; emacs title 이다.
+(setq frame-title-format (list '(buffer-file-name "%f")))
+;; (setq frame-title-format (format "%%f - %%s %s" custom-enabled-themes))
+;; (setq frame-title-format (format "%%f - %%m,    Theme : %s" custom-enabled-themes))
+
+(setq frame-title-format
+         '(buffer-file-name "%f"
+            (dired-directory dired-directory "%b")))
+
+;; emacs 실행해서 icon 상태에서의 문자열이다.
 (setq icon-title-format frame-title-format)
+
+;; (setq frame-title-format
+;;           (setq icon-title-format
+;;                 (format "%%b - %semacs" custom-enabled-themes)))
+;; (setq frame-title-format (format "%%b - %semacs" custom-enabled-themes))
+
+;; (setq frame-title-format (format "%%f - %%s %s" custom-enabled-themes))
+
 
 
 
