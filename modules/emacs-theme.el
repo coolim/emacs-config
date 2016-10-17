@@ -84,7 +84,7 @@
 
 
 
-
+;;(message "%s" custom-enabled-themes)
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (load-theme 'zenburn t))

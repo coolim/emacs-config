@@ -2,6 +2,9 @@
 ;;; Copyright (C) 2016 by KudzuValley
 
 
+;;************************************************************
+;;         E M A C S    S E T T I N G S
+;;************************************************************
 
 ;; remove emacs init window
 (setq inhibit-startup-message t)
@@ -45,6 +48,15 @@
 ;; ================================================================================
 ;; Enable the command `narrow-to-region' ("C-x n n"), a useful
 ;; command, but possibly confusing to a new user, so it's disabled by default.
+
+;; vi는 block 설정 후(v, Shift-V, Ctrl-V) block에 있는 단어를 바로 바꿀 수 있다(:s).
+;; vi보다 조금 복잡하지만 Emacs에도 같은 기능이 있다.
+;; 1. Mark set'C-SPC', 'C-@'를 이용하여 mark 설정한다.
+;; 2. narrow-to-region (C-x n n)'M-x narrow-to-region'을 실행하여 mark설정한 부분만 작업을 할 수 있도록 한다.
+;; 3. Query replace
+;;    'M-%'로 문자 치환한다.
+;; 4. widen (C-x n w)'M-x widen'으로 원래 화면으로 전환한다.
+
 
 ;; Restrict buffer editing to a region
 (put 'narrow-to-region 'disabled nil)

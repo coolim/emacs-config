@@ -786,5 +786,60 @@
 ;;----------------------- time stamp end --------------------------------------
 
 
+;; Make the sequence "C-x w" execute the `what-line' command,
+;; which prints the current line number in the echo area.
+(global-set-key "\C-xw" 'what-line)
+
+
+(setq default-major-mode 'indented-text-mode)
+(toggle-text-mode-auto-fill)            ; always auto-fill in text mode,
+
+;; for org tags test
+;; 자주 사용하는 태그를 미리 저장해 놓고 쓰면
+;; 편하다. 방법은 두가지가 있다.
+;; 1.
+;; (setq org-tag-alist '(("URGENT" . ?u)
+;;                       ("@PHONE" . ?p)
+;;                       ("@ERRANDS" . ?e)))
+;; 2.
+;; org 파일 처음 시작 부분에 아래처럼 작성한다.
+;; #+TAGS: URGENT(u) @PHONE(p) @ERRANDS(e)
+
+;;위의 두 가지 방법이 중복되서 실행은 되지 않는다.
+;;즉 1번 설정을 놓고 org file 처음에
+;; #+TAGS: TEST(t)
+;;라고 설정을 하면 총 네가지가 미리 나와야 하는데
+;; 그렇게 나오지를 않는다.
+;; 상황에 맞게 알아서 사용해야겠다.
+
+
+;;Quick-Start Tramp Configuration
+;;(setq tramp-default-method "ssh")
+
+;;For GNU Emacs
+;;C-x C-f /remotehost:filename  RET (or /method:user@remotehost:filename)
+
+;; using su or sudo
+;;C-x C-f /su::/etc/hosts RET
+;;C-x C-f /sudo::/etc/hosts RET
+
+
+
+
+;; 한글 입려할때 아래 미니버퍼 부분에 한글에 초성 중성 종성으로 나뉘어서
+;; 표시가되는데 상당히 거슬린다 없애버리자!!!!
+;; (setq input-method-verbose-flag nil)
+
+
+
+;; Allow access to system clipboard.
+;; This is supposed to be a default but for
+;; some reasons, it do not work for me..
+;; So I put this...
+;; (setq x-select-enable-clipboard t)
+
+
+
+
 (provide 'emacs-tips)
 ;;; emacs-tips.el ends here

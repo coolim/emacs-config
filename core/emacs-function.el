@@ -353,5 +353,17 @@ user."
 
 
 
+;; unicode shell
+(defun unicode-shell ()
+  "Execute the shell buffer in UTF-8 encoding.
+Note that you'll need to set the environment variable LANG and others
+appropriately."
+  (interactive)
+  (let ((coding-system-for-read 'utf-8)
+        (coding-system-for-write 'utf-8)
+        (coding-system-require-warning t))
+    (call-interactively 'shell)))
+
+
 (provide 'emacs-function)
 ;;; emacs-function.el ends here

@@ -27,6 +27,59 @@
 
 
 
+;;
+;; c++, c style
+;;
+
+;; (defconst lim-c-style
+;; '((c-tab-always-indent . t)
+;; (c-comment-only-line-offset . 2)
+;; (c-hanging-braces-alist . ((substatement-open after)
+;; (brace-list-open)))
+;; (c-hanging-colons-alist . ((member-init-intro before)
+;; (inher-intro)
+;; (case-label after)
+;; (label after)
+;; (access-label after)))
+;; (c-cleanup-list . (scope-operator
+;; empty-defun-braces
+;; defun-close-semi))
+;; (c-offsets-alist . ((arglist-close . c-lineup-arglist)
+;; (substatement-open . 0)
+;; (case-label . 0)
+;; (block-open . 0)
+;; (knr-argdecl-intro . -)))
+;; (c-echo-syntactic-information-p . t)
+;; )
+;; "LimYongHee Style")
+
+
+;;
+;; Customizations for all modes in CC Mode.
+;;
+
+;; (defun my-c-mode-common-hook ()
+;; (c-add-style "PERSONAL" lim-c-style t)
+;; (setq tab-width 2
+;; indent-tabs-mode t
+;; c-basic-offset 2)
+;; (c-toggle-auto-state -1) ; disable auto-newline mode
+;; (c-toggle-hungry-state 1) ; enable hungry-delete mode
+;; (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+;; (define-key c-mode-base-map [(control c)(return)] 'ff-find-other-file)
+;; (c-set-offset 'substatement-open 0)
+;; (c-set-offset 'member-init-intro '++)
+;; (c-set-offset 'inline-open 0)
+;; (c-set-offset 'comment-intro 0)
+;; (c-set-offset 'statement-case-open 2)
+;; (c-set-offset 'label 0)
+;; (c-set-offset 'arglist-intro '++)
+;; (hs-minor-mode 1))
+
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+
+
 
 
 (provide 'emacs-programming)

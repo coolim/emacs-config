@@ -46,6 +46,10 @@
 ;; 이미 기본적으로 transient 가 되어 있지만 확실하게 하자.
 (if (fboundp 'transient-mark-mode) (transient-mark-mode t))
 
+;; Visual feedback on selections
+;; (setq-default transient-mark-mode t)
+
+
 
 ;;; Dired
 ;; Allows recursive deletes
@@ -862,6 +866,30 @@ PROMPT sets the `read-string prompt."
 
 ;;(bash-completion-setup)
 
+
+;;; prompt
+
+(add-hook `comint-output-filter-functions
+          `comint-watch-for-password-prompt)
+
+
+;;
+;; Make the inferior shell a login shell.
+;;
+(setq explicit-bash-args (quote ("--noediting" "-i" "-l")))
+
+;; Always end a file with a newline
+;; (setq require-final-newline t)
+;; (setq require-final-newline nil)
+
+
+;window resize
+;################################################
+;; (global-set-key "\C-x," 'shrink-window)
+;; (global-set-key "\C-x." 'enlarge-window)
+;; (global-set-key "\C-x[" 'shrink-window-horizontally)
+;; (global-set-key "\C-x]" 'enlarge-window-horizontally)
+;################################################
 
 
 

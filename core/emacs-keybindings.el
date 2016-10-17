@@ -28,8 +28,8 @@
 (global-set-key (kbd "C-x <left>") 'windmove-left)
 
 
-(global-set-key [up] '(lambda () (interactive) (scroll-down 1)))
-(global-set-key [down] '(lambda () (interactive) (scroll-up 1)))
+;; (global-set-key [up] '(lambda () (interactive) (scroll-down 1)))
+;; (global-set-key [down] '(lambda () (interactive) (scroll-up 1)))
 
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
