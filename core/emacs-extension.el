@@ -163,6 +163,15 @@
       (append '(("\\.as$"  . actionscript-mode))
               auto-mode-alist))
 
+(setq auto-mode-alist
+      (append '(("\\.patch$"  . diff-mode))
+              auto-mode-alist))
+(setq auto-mode-alist
+      (append '(("\\.diff$"  . diff-mode))
+              auto-mode-alist))
+
+
+
 
 (add-to-list 'auto-mode-alist '("\\.include$" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.lib$" . makefile-mode))

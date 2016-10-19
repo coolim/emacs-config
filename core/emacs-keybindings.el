@@ -93,15 +93,22 @@
 (global-set-key (kbd "\C-cip") 'copy-to-buffer-filename)
 
 
+;; mint
+(when (executable-find "nemo")
+  (eval-after-load "dired" '(progn
+                              (define-key dired-mode-map (kbd "e") 'dired-open-nemo))))
+
+;; ubuntu
+(when (executable-find "nautilus")
+  (eval-after-load "dired" '(progn
+                              (define-key dired-mode-map (kbd "e") 'dired-open-nautilus))))
+
+;; backbox
+(when (executable-find "thunar")
 (eval-after-load "dired" '(progn
-			    (define-key dired-mode-map (kbd "e") 'dired-open-thunar) ))
+                            (define-key dired-mode-map (kbd "e") 'dired-open-thunar))))
 
 
-(eval-after-load "dired" '(progn
-			    (define-key dired-mode-map (kbd "e") 'dired-open-nemo) ))
-
-(eval-after-load "dired" '(progn
-			    (define-key dired-mode-map (kbd "e") 'dired-open-nautilus)))
 
 
 
