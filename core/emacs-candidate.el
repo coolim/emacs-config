@@ -35,7 +35,9 @@
 
 ;; auto fill 이라는 것은 문장을 계속 쓰다가 Space 가 들어가면 자동으로 여러라인으로 나누어 진다.
 ;; M-q 와 비슷하다고 봐도 무방하다. 이 모드는 별로 선호하는 기능은 아니다.
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; auto-fill 에 설정되어 있으면 문장이 길어지면 자동으로 다음 줄로 넘어간다. 극혐이다.
+;; 물론 필요한 경우도 있을 것이다. 그 때만 수동으로 사용하면 좋을 것 같다.
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 (setq find-file-visit-truename nil)
 ;;(buffer-file-name)

@@ -258,10 +258,12 @@
 ;;;;; dired-mode 의 기본 옵션은 ls -la 과 동일하다.
 ;;;;; 이걸 변경하고 싶으면 C-u s 를 해 보면
 ;;;;; -al 과 갈이 되어 있을 것이다. 이것을 변경을 하면 된다.
-;; (setq dired-listing-switches "-aBhl  --group-directories-first")
+;;; --group-directories-first 는 먼저 디렉토리 먼저 보여준다.
+;;; 원래는 디렉토리와 파일을 구분없이 보여 주기 때문에 이상한 부분이 있다.
+(setq dired-listing-switches "-aBhl  --group-directories-first")
 ;; (setq dired-listing-switches "-aBlgh")
 ;;(setq dired-listing-switches "-Blh")
-(setq dired-listing-switches "-Blha")
+;; (setq dired-listing-switches "-Blha")
 
 
 ;; ================================================================================
