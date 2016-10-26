@@ -12,6 +12,8 @@
 (setq org-log-done t)
 (add-hook 'org-mode-hook  (lambda() (hl-line-mode)))
 
+;; org mode 에서 auto-fill 이 되면 귀찮다.
+(add-hook 'org-mode-hook '(auto-fill-mode -1))
 
 ;; org agenda 가 필요하면 아래처럼 특정파일을 지정하면 된다.
 ;; (setq org-agenda-files (list "~/workspace/workspace_git/pm_docs/TUNEProjects.org"

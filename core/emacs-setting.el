@@ -389,9 +389,6 @@
 
 
 
-
-
-
 (provide 'emacs-setting)
 ;;; emacs-setting.el ends here
 
