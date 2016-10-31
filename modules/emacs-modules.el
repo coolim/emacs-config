@@ -31,7 +31,7 @@
 
 (require 'emacs-org)
 
-;;(require 'emacs-cscope)
+(require 'emacs-cscope)
 
 (require 'emacs-web)
 
