@@ -6,7 +6,7 @@
 ;; file format 관련 mode 는 단순 highlight 기능만을 사용하기 때문에 따로 lisp 파일을
 ;; 작성하지 말고 emacs-modes.el 파일에 정의한다.
 
-(emacs-require-packages '(actionscript-mode dts-mode markdown-mode groovy-mode batch-mode))
+(emacs-require-packages '(actionscript-mode dts-mode markdown-mode groovy-mode batch-mode python-mode))
 
 ;; ==================================
 ;; actionscript-mode
@@ -64,3 +64,10 @@
 
 
 
+;; =======================================
+;; PYTHON mode
+;; =======================================
+
+(require 'python-mode)
+
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
