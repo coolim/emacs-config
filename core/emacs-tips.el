@@ -842,5 +842,517 @@
 
 
 
+;; Make the sequence "C-x w" execute the `what-line' command, 
+;; which prints the current line number in the echo area.
+;; (global-set-key "\C-xw" 'what-line)
+
+
+
+;; ************************************************************
+;;               T I P    &   T R I C K S
+;; ************************************************************
+
+;; use registers
+;; To copy to named register: C-x r s a - Where a is the name of the
+;; register ( a - z ) to save the text to.
+
+;; To paste from named register: C-x r i a - Where a is the name of
+;; the register ( a - z ) to paste the saved text from.
+
+;; To remember current point: C-x r spc a - Where a is the name of the
+;; register to save point to.
+;; To jump to named point: C-x r j a - Where a is the name of the
+;; register holding desired point to jump to
+;; =====================================================================
+;; =====================================================================
+
+
+
+
+;;; 파일을 dos to unix 를 할려면 set-buffer-file-coding-system을 이용하면 된다.
+
+;; find . -name "*.c" -exec perl -pi -e 's/\r//g' {}\;
+;; perl -pi -e "s/\r//g" *
+;; find / -name "*.txt" -exec perl -pi -e 's/찾을문자열/바꿀문자열/g' {} 
+;; sed -e "s/^M//g" dos.file > unix.file
+
+
+;;tip
+;; 영역을 잡고 tab 넣는것은, 전 이렇게 합니다. 
+;; 블럭잡고 C-x r t 누르면 밑에 입력부분이 활성화 됩니다. 
+;; 거기에 넣고 싶은 문자열을 넣으면 블럭잡은 앞부분에 
+;; 그 문자열이 추가됩니다. 탭도 되고, 스페이스도 되고요. 
+;; 저같은 경우는 한번에 주석 늘때 자주 사용합니다.
+
+
+
+
+;:* Use a sexy background pixmap.
+;;(set-face-background-pixmap 'default
+;;[png :file "~/.xemacs/xemacs_bg.png"])
+;;[jpeg :file "~/down/Tiger.jpg"])
+
+;;(set-face-background-pixmap 'default
+;;[png :file "~/.xemacs/xemacs_bg.png"])
+;;[jpeg :file "~/emacs_settings/eunseo.jpg"])
+
+
+; Make man pages appear in current window
+;; (if (boundp 'Man-notify)
+;;     Man-notify 'bully)
+
+
+;; tip
+;;C-u C-x = : 현재 출력되고 있는 font 종류 표시
+
+
+
+
+;;; 클릭해야 focus가 이동할 때
+;;(setq focus-follows-mouse nil)
+
+;: Set background-mode to dark (why isn't this autodetected?)
+;;(setq frame-background-mode 'dark)
+
+
+
+;; (defun select-frame-set-input-focus (frame)
+;;   "Select FRAME, raise it, and set input focus, if possible."
+;;   (select-frame frame)
+;;   (raise-frame frame)
+;;   ;; Ensure, if possible, that frame gets input focus.
+;;   (cond ((eq window-system 'x) (x-focus-frame frame))
+;;         ((eq window-system 'w32) (w32-focus-frame frame)))
+;;   (cond (focus-follows-mouse
+;;          (set-mouse-position (selected-frame)
+;;                              (1- (frame-width)) 0))))
+
+;; (custom-set-faces '(default ((t (:stipple nil :background ((image
+;;  :type jpeg :file "~/down/Tiger.png") :origin display) :foreground
+;;  "white" :inverse-video nil :box nil :strike-through nil :overline
+;;  nil :underline nil :slant normal :weight normal :height 101 :width
+;;  normal :family "misc-fixed")))))
+
+;; (defconst win32p  (eq system-type 'windows-nt) "윈도머신이면 참")
+;; (defconst unixp   (eq system-type (or 'gnu/linux 'berkeley-unix)) "FreeBSD 머신이면 참")
+;; (defconst homep   (string-match "BADMAN" system-name)"집의 pc 라면 참")
+;; (defconst officep (string-match "PYTHON" system-name)"사무실의 pc 라면 참")
+
+
+
+(if (functionp 'global-hi-lock-mode) ; C-x w h 등으로 특정 단어들을 빛내준다
+    (global-hi-lock-mode 1)
+  (hi-lock-mode 1))
+;;(global-hl-line-mode 1)                 ; 현재줄을 빛내준다
+
+
+;; 단어 highlight
+;; C-x w h
+
+;; highlight 단어 빼기
+;; C-x w r
+
+
+;; hl-lock-mode 가 제공하는 기능으로, 그중 자주쓰는 것이 위의 두가지. 
+;; vim 에서는 단어위에서 % 를 누르는것만으로 가능했는데, 
+;; 키바인딩이 다소 복잡하다. 자주 쓰게 된다면 좀 편한 함수, 
+;; hi-word-at-point 등을 만들어서 쓰자.
+;; 현재 내가 쓰는 cvs emacs 는 이전 stable 때의 hi-lock-mode 와 약간 다르게 도는 버그가 있다.
+
+
+;;;; 윈도에서는 윈도키를 잘 써먹자
+;; (when win32p
+;;   (setq w32-pass-lwindow-to-system nil
+;;         w32-pass-rwindow-to-system nil
+;;         w32-pass-apps-to-system    nil
+;;         w32-lwindow-modifier       'super   ;; Left Windows
+;;         w32-rwindow-modifier       'super   ;; Rigth Windows
+;;         w32-apps-modifier          'hyper) ;; App-Menu (right to Right Windows)
+;;   (global-set-key [(super g)] 'goto-line))
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; word-at-point 로 영어사전 검색
+;; 햐.. 몇줄안되지만 elisp 처음 써보는거라 힘들었다.
+;; thingatpt 의 word-at-point ( thing-at-point 의 alias ) 의 존재를 모르고
+;; word-at-point 를 만들어 볼려고 고생했었는데.. thingatpt 의 존재를 알게되서 다행이다
+;; 키바인딩을 해야 하는데.. 뭘로 할까? vim 이면 <Leader>dic 정도로 했을텐데..
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (require 'thingatpt)
+;; (setq yoonkn/dic-dicurl "http://kr.engdic.yahoo.com/search/engdic?p=%s")
+;; (defun yoonkn/dic-at-point ()
+;;   (interactive)
+;;   (browse-url (format yoonkn/dic-dicurl (word-at-point))))
+;; (global-set-key "\C-cdic" 'yoonkn/dic-at-point)
+
+
+
+
+;; change logs 작성 팁
+;; C-x 4 a 로 ChangeLog 에 새로운 항목을 추가할수 있다.
+;; (add-change-log-entry-other-window) 즉 어떤 파일을 수정하고 C-x 4 a 로 
+;; change log 를 작성하게 되면 해당 디렉토리 내에 ChangeLog 라는 
+;; 파일이 생성(또는 내용이 추가)되며, 누가, 어떤 파일을 고쳤는지 기록할수 있게 해준다.
+
+
+
+
+;; C, Cpp 모드 팁
+
+;; 전처리기 적용해보기
+;; 블럭잡고 C-c C-e 를 해보면 전처리가 적용된 후의 코드들을 볼수있다. 간단히 #include 등에 블럭을 잡고 눌러보자
+
+;; 함수 하나 블럭 잡기
+;; C-M-h 를 누르면 현재 커서가 포함된 함수전체를 블럭으로 잡아준다. copy-paste 작업을 할때 굳~
+
+
+
+
+
+
+;; 위 의 내용은 function 을 적은 것이기 때문에 .emacs 
+;; 편집 화면 내에서 C-x C-e 를 누르시면 reload-dotemacs 
+;; 라는 이름의 function 이 실시간으로 등록됩니다. 
+;; 이제 M-x reload-dotemacs 라고 하면 짜자잔~
+
+;; wisembed settop의 mips칩 빌드를 위한 env 셋팅
+;;/////////////////////////////////////////////////////////////////
+;; (setq load-path (cons (expand-file-name "/usr/share/emacs/23.0.0/site-lisp/") load-path))
+;;(setq exec-path (cons "C:/MinGW/bin" exec-path))
+;(setenv "PATH" (concat "C:\\MinGW\\bin;" (getenv "PATH")))
+(setq exec-path (cons "/home/user/8634/toolchain/build_mipsel/staging_dir/usr/bin:/home/user/8634/toolchain/build_mipsel/staging_dir/bin:" exec-path))
+(setenv "PATH" (concat "/home/user/8634/toolchain/build_mipsel/staging_dir/usr/bin:/home/user/8634/toolchain/build_mipsel/staging_dir/bin:" (getenv "PATH")))
+(setenv "CCACHE_DIR")
+;;/////////////////////////////////////////////////////////////////
+
+
+;; 컴파일 창을 높인다.
+;;(setq compilation-window-height 8)
+
+
+;;아래 코드를 넣으면 emacs에서 compile작업시 자동으로 인식해서 명령을 내려준다.
+;;emacs에서의 자체 varialbles가 있다.
+
+;; example 1
+;; 간단히 소스아래부분에 이걸 넣에주면 따로 컴파일 명령어를 하지 않아도
+;; 아래에 있는 compile-command명령이 주어진다.
+;;/*
+;; * Local variables:
+;; * compile-command: "gcc -Wall -O2 `xine-config --cflags` `xine-config --libs` -I/usr/X11R6/include -L/usr/X11R6/lib -lX11 -lm -o muxine muxine.c"
+;; * End:
+;; */
+
+
+;; example 2
+;; Local Variables: **
+;; mode:lisp **
+;; comment-column:0 **
+;; comment-start: ";; "  **
+;; comment-end:"**" **
+;; End: **
+
+
+
+
+;; 쿼리 실행용 버퍼 띄우기
+
+;; http://jfulton.org/?page=Software&file=emacs.php
+
+;;    1. M-x sql-mysql
+;;    2. You will then be prompted for the User:, Password:, Server:, and Database: in the mini-buffer
+;;    3. 다음의 단축키로 작성한 쿼리를 실행시킬 수 있다.
+
+;;     *  C-c C-b: sql-send-buffer
+;;     * C-c C-r: sql-send-region
+;;     * C-c C-c: sql-send-paragraph
+
+;;위에처럼 M-x sql-help를 하면 아래쪽 처럼 각 DB별로 help가 나온다.
+
+;; (sql-help)
+
+;; PostGres: M-x sql-postgres
+;; MySQL: M-x sql-mysql
+;; SQLite: M-x sql-sqlite
+
+
+
+
+;;; Emacs의 longlines-mode는 긴 줄이 포함된 텍스트를 쉽게 편집할 수 있도록 도와주는 minor mode입니다.
+;;; M-x longlines-mode <RET>
+;;; longlines-mode에서는 fill-column 값을 넘어가는 긴 줄은 자동으로 줄 바꿈이 되며, 실제 라인 단위가 
+;;; 아니라 화면에 보이는 라인 단위로 이동하는 것이 가능해집니다.
+;;; 따라서, 프로그램 소스 코드가 아닌 일반 텍스트 문서를 작성할 때 아주 유용합니다.
+;;; 만약, longlines-mode에서 실제 라인과 화면에 보이는 라인이 구분이 어렵다면, 
+;;; longlines-show-hard-newlines 변수를 nil이 아닌 값으로 설정하면 됩니다.
+;;; M-x set-variable <RET> longlines-show-hard-newlines <RET> t <RET>
+
+
+;;; 위의 longlines-mode보다 더 괜찮은 것을 찾았다.
+;;; vim에서의 gj, gk 기능을 emacs에서도 써보자!
+;;; 아래 url에서 download
+;;; http://homepage1.nifty.com/bmonkey/emacs/elisp/screen-lines.el
+
+
+
+
+;;; shell상에서 ls치면 이상하게 표현되는 현상은 아직 해결 못하고 있다.
+;;; 아래와 갈이 요상한 문자로 나온다.
+;;; user@user-desktop:~$ ls
+;;; [0m[0m#.emacs#[0m                     [01;34memacs_install[0m            [01;34mtorrent[0m
+;;; [0m#emacs-registers#[0m            [0mfontlist[0m                 [0mtrac.back[0m
+;;; [01;34m8634[0m                         [0mnext-screen-line.el[0m      [01;34mworkspace[0m
+;;; [01;36mExamples[0m                     [0msemantic.cache[0m           [01;34m공개[0m
+;;; [0mFirefox_wallpaper.png[0m        [01;34msharp[0m                    [01;34m문서[0m
+;;; [0m[병완] Like a dophine..html[0m  [0mssl.back[0m                 [01;34m바탕화면[0m
+;;; [01;34mdown[0m                         [0mtelepix.crt[0m              [01;34m비디오[0m
+;;; [0memacs-registers[0m              [0mtelepix.key[0m              [01;34m사진[0m
+;;; [0memacs-registers~[0m             [0mtelepix.key.for.apache2[0m  [01;34m음악[0m
+;;; [0memacs.tar.gz[0m                 [0mtest.c[0m                   [01;34m템플릿[0m
+
+;;; 위의 현상은 color표시를 잘 해주지 못해서 나타나는 현상이다.
+;;; 참고 페이지는 아래와 같다.
+;;; http://www.emacswiki.org/cgi-bin/wiki?AnsiColor
+
+;;; 아래 설정만 해 주면 제대로 동작을 한다.
+
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;;; 옛날 버전의 emacs는 아래 파일을 다운 받아서 위에 처렁 설정해 주면 된다. 
+;;; http://www.emacswiki.org/cgi-bin/wiki/download/ansi-color.el
+
+
+;;; 이맥스에는 show-trailing-whitespace라는 변수가 존재합니다.
+;;; 일반적으로 공백은 눈에 보이지 않기 때문에, 줄 끝에 공백이 있는지 
+;;; 확인하기 어렵지만, 이 변수에 nil이 아닌 값을 설정하면, 
+;;; 줄 끝에 나타나는 공백을 눈으로 볼 수 있습니다.
+
+;;; 이맥스 설정 파일인 .emacs 파일에 다음 내용을 추가하여, 
+;;; 이 기능을 기본적으로 활성화시킬 수도 있습니다. (추천 안함)
+
+;;; (setq-default show-trailing-whitespace t)
+
+;;; 그리고 줄 끝에 나타나는 이러한 공백들은 
+;;; delete-trailing-whitespace 명령으로 한꺼번에 제거할 수 있습니다.
+
+;;; M-x delete-trailing-whitespace
+
+
+
+
+
+;;;원하는 헤더 화일에 관해서 들어있는 패키지가 뭔지 알아 볼려면 아래처럼 한다.
+;; apt-cache show build-essential | grep Depends 
+;; Depends: libc6-dev | libc-dev, gcc (>= 4:4.1.1), g++ (>= 4:4.1.1), make, dpkg-dev (>= 1.13.5) 
+
+;; dpkg -S /usr/include/stdio.h                  
+;; libc6-dev: /usr/include/stdio.h 
+
+;;; yum은 yum provides stdio.h 라고 한다.
+
+
+
+
+  
+;;;;;; mysql
+
+
+(defvar my-databases nil "A list of database names used by my-update-database.")
+(setq my-databases '("square_training"))
+
+;; Sends the current file to a chosen database
+(defun my-update-database ()
+  "Sends the current file to a chosen database."
+  (interactive)
+  (if (not my-sql-profile)
+      (my-sql-set-profile))
+  (let ((db_name (let ((completion-ignore-case t))
+                   (ido-completing-read "Database: " my-databases))))
+    (if (not (member db_name my-databases))
+        (push db_name my-databases))
+    (if buffer-file-name
+        (progn
+          (shell-command (concat "mysql " db_name " --host=" sql-server
+                                 " --user=" sql-user " --password=" sql-password
+                                 " < " buffer-file-name)))
+    (message "No file associated with buffer."))))
+
+(add-hook 'sql-mode-hook (lambda () (local-set-key (kbd "C-c C-b") 'my-update-database)))
+
+;; The current mysql profile
+(defvar my-sql-profile nil)
+
+;; Links mysql profile names to sql-mode variables
+(defvar my-sql-vars '(("localhost" . ("username" "password" "host"))
+                      ("otherhost" . ("username" "password" "host"))))
+
+(defun my-sql-mysql (change)
+  (interactive "P")
+  (my-sql-set-profile change)
+  (sql-mysql))
+
+;; Runs sql-mysql. When called with a prefix argument (or on first run) it
+;; prompts for the sql profile to select.
+(defun my-sql-set-profile (&optional change)
+  "Sets up the sql-mode variables and then runs sql-mysql."
+  (if (or (not my-sql-profile) change)
+      (let ((completion-ignore-case t)
+            (completion-function 'ido-completing-read))
+        (let ((choice (funcall completion-function "SQL Profile: " my-sql-vars)))
+          (dolist (profile my-sql-vars)
+            (let ((profile-name (car profile))
+                  (profile-vars (cdr profile)))
+              (if (string-match profile-name choice)
+                  (setq sql-user (nth 0 profile-vars)
+                        sql-password (nth 1 profile-vars)
+                        sql-server (nth 2 profile-vars)
+                        my-sql-profile profile-name))))))))
+
+
+
+
+;; valgrind options
+;; valgrind --workaround-gcc296-bugs=yes --tool=memcheck --leak-check=full --show-reachable=yes -v ./ssplayer ~/movies/koma500k.avi 
+;; valgrind  --tool=memcheck --leak-check=full --show-reachable=yes -v ./acqsvsvr
+
+
+
+
+;;; validation check
+;;; xmllint --valid test.xml
+;;; xmllint --htmlout --valid test.xml
+
+
+;;; textmate에 있는 내용이다. 나중에 참고해 보자.
+;; xmllint --htmlout --valid - 2>&1|perl -pe
+;; 's|^((?:</?[^>]+>)*)(.*?):(\d+):(.*error.*)|$1<a
+;; href="txmt://open?line=$3">$4</a>|'
+
+
+
+
+;; To use resize-minibuffer-mode, uncomment this and include in your .emacs:
+;;(resize-minibuffer-mode)
+
+
+
+
+
+
+;; use carbon emacs on mac osx
+;; transparency windows
+(defun opacity-modify (&optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+          (oldalpha (if alpha-or-nil alpha-or-nil 100))
+;;          (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+          (newalpha (if dec (- oldalpha 5) (+ oldalpha 5))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+
+ ;; C-8 will increase opacity (== decrease transparency)
+ ;; C-9 will decrease opacity (== increase transparency
+ ;; C-0 will returns the state to normal
+(global-set-key (kbd "C-8") '(lambda()(interactive)(opacity-modify)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(opacity-modify t)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))
+
+
+
+;;  아래를 C-x C-e 로 실행을 하면 alpha 값이 적용은 된다.
+;; (modify-frame-parameters nil `((alpha . 90)))
+
+
+;;; 알파값 설정이라는데 동작하지 않는다.
+;;; carbon emacs를 사용하면 맥에서는 동작을 한다.
+;;; 위의 함수를 사용하면 어떤 플랫폼에서도 동작을 하게 할 수 있다.
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+;; (set-frame-parameter (selected-frame) 'alpha '(85 50))
+;;(set-frame-parameter (selected-frame) 'alpha '(60 50))
+
+
+
+;; 여러 파일 문자열 치환하기
+
+;; M-x find-grep-dired 로 directory 선택
+;; *Find* 버퍼에 파일 목록이 나열되면 t를 눌러 해달 파일 toggle
+;; Q를 눌러 dired-do-query-replace를 실행
+;; 원하는 문자열을 변경한다.
+
+
+;; M-x customize-group RET dictionary RET 를 입력해서 설정을 바꿔줄
+;; 수도 있습니다.
+
+
+
+;;;; 문자 인코딩 변환하기
+;;;; C-x C-m r 은 현재 파일을 설정한 인코딩으로 변환을 하는 것이다.
+;;;; C-x RET f 은 현재 파일을 설정한 인코딩으로 변환하는게 아니라 바로 저장을 해 버린다.
+
+
+
+
+;;;; 위의 설정을 해 놓고 svn을 사용하는 상황에서 windows나 linux는 별문제 없지만
+;;;; 맥에서는 아래와 같은 메시지와 함께 commit같은걸 하면 작동을 안한다.
+;; svn: Commit failed (details follow):
+;; svn: Can't convert string from native encoding to 'UTF-8':
+
+;; 아래 설정을 하면 왜 인지는 모르지만 잘 돌아간다.
+;;  맥 에서 svn하고 emacs하고 잘 안돌아  가면
+;; 아래 설정을 해 준다.
+;; .profile 에 다음과 같이 추가해 줍니다.
+;; export LC_CTYPE=en_US.UTF-8
+;; export LANG=en_US.UTF-8
+
+
+
+
+
+
+
+;; emacs 사전 설정
+;; dictionary added
+;; (add-to-list 'load-path
+;;                    "~/.emacs.d/dictionary-1.8.7")
+
+;; (load "dictionary-init")
+
+;; ;; dictionary key bindings
+;; (global-set-key "\C-cs" 'dictionary-search)
+;; (global-set-key "\C-cm" 'dictionary-match-words)
+
+;; M-x customize-group RET dictionary RET 를 입력해서 설정을 바꿔줄
+;; 수도 있습니다.
+
+
+
+
+
+;; carbon emacs에는 기본적으로 포함되어 있기 때문에 설정할 필요가
+;; 없다. 다만 최신 버전을 사용할려고 한다면 한번 고려해 보자.
+;; for using svn
+;;(require 'psvn)
+;; (setq process-coding-system-alist '(("svn" utf-8)))
+;;(setq default file--name-coding-system ' utf-8)
+
+;;;; 문자 인코딩 변환하기
+;;;; C-x C-m r 은 현재 파일을 설정한 인코딩으로 변환을 하는 것이다.
+;;;; C-x RET f 은 현재 파일을 설정한 인코딩으로 변환하는게 아니라 바로 저장을 해 버린다.
+
+
+
+;; emacs_for_mac2의 gmail 부터 보면 됨
+
+
+
+
+
+
+
+
 (provide 'emacs-tips)
 ;;; emacs-tips.el ends here

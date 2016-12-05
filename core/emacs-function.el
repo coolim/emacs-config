@@ -365,5 +365,218 @@ appropriately."
     (call-interactively 'shell)))
 
 
+
+(defun dos2unix (buffer)
+      "Automate M-% C-q C-m RET C-q C-j RET"
+      (interactive "*b")
+      (save-excursion
+        (goto-char (point-min))
+        (while (search-forward (string ?\C-m) nil t)
+          (replace-match (string ?\C-j) nil t))))
+
+
+;;Convert DOS cr-lf to UNIX newline
+(defun dos-unix ()
+  (interactive)
+    (goto-char (point-min))
+    (while (search-forward "\r" nil t) (replace-match "")))
+
+
+
+;;Convert UNIX newline to DOS cr-lf
+(defun unix-dos ()
+  (interactive)
+    (goto-char (point-min))
+      (while (search-forward "\n" nil t) (replace-match "\r\n")))
+
+
+;;ASCII table function
+(defun ascii-table ()
+  "Print the ascii table. Based on a defun by Alex Schroeder <asc@bsiag.com>"
+  (interactive)  (switch-to-buffer "*ASCII*")  (erase-buffer)
+  (insert (format "ASCII characters up to number %d.\n" 254))  (let ((i 0))
+    (while (< i 254)      (setq i (+ i 1))
+      (insert (format "%4d %c\n" i i))))  (beginning-of-buffer))
+
+
+
+;;make-comment-italic
+(defun make-comment-italic ()
+  (interactive "*")
+  (make-face-italic 'font-lock-comment-face))
+
+;;make-comment-unitalic
+(defun make-comment-unitalic ()
+  (interactive "*")
+  (make-face-unitalic 'font-lock-comment-face))
+
+;;make-comment-invisible
+(defun make-comment-invisible ()
+  (interactive "*")
+  (custom-set-faces
+ '(font-lock-comment-face ((((class color)) (:foreground "white"))))))
+
+;;make-comment-visible
+(defun make-comment-visible ()
+  (interactive "*")
+  (custom-set-faces
+ '(font-lock-comment-face ((((class color)) (:foreground "green4"))))))
+
+;;make-comment-red
+(defun make-comment-red ()
+  (interactive "*")
+  (custom-set-faces
+ '(font-lock-comment-face ((((class color)) (:foreground "red3"))))))
+
+
+;;run the current perl program
+(defun run-perl ()
+  (interactive "*")
+  (setq perl-buffer-name buffer-file-name)
+  (shell)
+  (setq perl-run-command "perl ")
+  (insert perl-run-command)
+  (insert perl-buffer-name)
+)
+
+;;debug the current perl program
+(defun debug-perl ()
+  (interactive "*")
+  (setq perl-buffer-name buffer-file-name)
+  (shell)
+  (setq perl-run-command "perl -d ")
+  (insert perl-run-command)
+  (insert perl-buffer-name)
+)
+
+;;Add perl print template
+(defun insert-perl-print ()
+  "Add perl print template"
+  (interactive "*")
+  (setq steve-var "print \"\\n\";")
+  (insert steve-var)
+)
+
+;;Add perl die template
+(defun insert-perl-die ()
+  "Add perl die template"
+  (interactive "*")
+  (setq steve-var "or die \" : $!\";")
+  (insert steve-var)
+)
+
+
+(defun wrap-all-lines ()
+  "Enable line wrapping"
+  (interactive) ;this makes the function a command too
+  (set-default 'truncate-lines nil)
+)
+
+(defun open-dot-emacs ()
+  "opening-dot-emacs"
+  (interactive) ;this makes the function a command too
+  (find-file "C:\.emacs")
+)
+
+
+
+;; Toggles between line wrapping in the current buffer.
+(defun toggle-line-wrapping ()
+  "Toggles between line wrapping in the current buffer."
+  (interactive)
+  (if (eq truncate-lines nil)
+      (progn
+        (setq truncate-lines t)
+        (redraw-display)
+        (message "Setting truncate-lines to t"))
+    (setq truncate-lines nil)
+    (redraw-display)
+    (message "Setting truncate-lines to nil"))
+  )
+
+(defun search-google ()
+  "Prompt for a query in the minibuffer, launch the web browser and query google."
+  (interactive)
+  (let ((search (read-from-minibuffer "Google Search: ")))
+    (browse-url (concat "http://www.google.com/search?q=" search))))
+
+(defun search-word ()
+ "Prompt for a query in the minibuffer, launch the web browser and query naver."
+(interactive)
+(let ((search (read-from-minibuffer "Naver English Dictionary Search: ")))
+    (browse-url (concat "http://endic.naver.com/search.nhn?query=" search))))
+
+
+
+
+
+;; Inserts the user name 
+(defun insert-userid ()
+  "Insert the my full name and address"
+  (interactive)
+	(insert user-full-name " <" user-mail-address ">"))
+
+
+;원하는 위치에 날짜를 넣을 수 있다. 
+(defun insert-date2 ()
+"Insert date at point."
+(interactive)
+(insert (format-time-string "%a %b %e, %Y %l:%M %p")))
+;; 수 11월  2, 2016  5:16 오후
+
+
+
+
+
+
+
+(defun copy-line (n)
+;;    "Copy N lines at point to the kill-ring."
+    "한줄카피 여러줄도 된다"
+    (interactive "p")
+    (kill-ring-save (line-beginning-position) (line-beginning-position (1+ n))))
+
+ (global-set-key "\C-ck" 'copy-line)
+
+;; Copies line and appends buffer name to the front of it
+;; used in checking the Charniak/Gomez parsers
+
+(defun copy-line-with-filename (n)
+    "Copy N lines at point to the kill-ring."
+    (interactive "p")
+    (kill-ring-save (line-beginning-position) (line-beginning-position (1+ n)))
+    (kill-append (concat (buffer-name) ": ") '1)
+)
+
+;;(global-set-key "\C-ck" 'copy-line-with-filename)
+
+
+;; the long missed vi like yy command
+;; (defun missed-yy (n)
+;;   "Copy N lines at point to the kill-ring."
+;;   (interactive "p")
+;;   (kill-ring-save (line-beginning-position) (line-beginning-position(1+ n))))
+
+;; (global-set-key "\C-xy" 'missed-yy)
+
+
+;; .emacs 파일 내에 다음과 같은 내용을 적습니다.
+
+;; function to reload .emacs
+;; (defun reload-dotemacs ()
+;;   "Reload .emacs"
+;;   (interactive)
+;;   (load-file "~/.emacs"))
+
+
+
+
+
+
+
+
+
 (provide 'emacs-function)
 ;;; emacs-function.el ends here
+
+

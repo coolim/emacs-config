@@ -2,6 +2,51 @@
 ;;; Copyright (C) 2016 by KudzuValley
 
 
+;; ************************************************************
+;;    S H O R T   C U T
+;; ************************************************************
+;;; Emacs Lisp escape sequence in a string:
+;;; <TAB> - `\t'  <RET> - `\r'  <ESC> - `\e'  <DEL> - `\d'
+;;;
+;;; To use function keys, mouse button, or non-ASCII character such
+;;; as `C-=' or `H-a', use a vector(`[..]') to specify the key sequence.
+;;;
+;;;  - If a vector element is a character, use the Lisp character constant,
+;;;    `?'. e.g. `?\C-='
+;;;  - For example, below two statements are the same:
+;;;     (global-set-key "\C-x\e\e" 'repeat-complex-command)
+;;;     (global-set-key [?\C-x ?\e ?\e] 'repeat-complex-command)
+;;;
+;;; Lisp Symbols for the function keys:
+;;;  `left', `up', `right', `down'
+;;;       Cursor arrow keys.
+;;;  
+;;;  `begin', `end', `home', `next', `prior'
+;;;       Other cursor repositioning keys.
+;;;  
+;;;  `select', `print', `execute', `backtab'
+;;;  `insert', `undo', `redo', `clearline'
+;;;  `insertline', `deleteline', `insertchar', `deletechar'
+;;;       Miscellaneous function keys.
+;;;                              
+;;;  `f1', `f2', ... `f35'
+;;;       Numbered function keys (across the top of the keyboard).
+;;;  
+;;;  `kp-add', `kp-subtract', `kp-multiply', `kp-divide'
+;;;  `kp-backtab', `kp-space', `kp-tab', `kp-enter'
+;;;  `kp-separator', `kp-decimal', `kp-equal'
+;;;       Keypad keys (to the right of the regular keyboard), with names or
+;;;       punctuation.
+;;;  
+;;;  `kp-0', `kp-1', ... `kp-9'
+;;;       Keypad keys with digits.
+;;;  
+;;;  `kp-f1', `kp-f2', `kp-f3', `kp-f4'
+;;;       Keypad PF keys.
+;;;
+
+
+
 (global-set-key "\C-c\C-f" 'grep-find)
 
 
@@ -77,6 +122,7 @@
 ;; 해당하는 가로의 짝을 자동으로 찾는다.
 ;; ===================================================================================================
 (global-set-key (kbd "\C-]") 'match-paren)
+(define-key global-map (kbd "%") 'match-paren)
 
 
 ;;; lisp file 을 만들었을 때 기본 설명과 provide 를 자동 생성하게 만들었다.

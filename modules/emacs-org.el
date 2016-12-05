@@ -83,6 +83,26 @@
 ;;      (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)))
 
 
+;; for org tags test
+;; 자주 사용하는 태그를 미리 저장해 놓고 쓰면
+;; 편하다. 방법은 두가지가 있다.
+;; 1.
+;; (setq org-tag-alist '(("URGENT" . ?u)
+;;                       ("@PHONE" . ?p)
+;;                       ("@ERRANDS" . ?e)))
+;; 2.
+;; org 파일 처음 시작 부분에 아래처럼 작성한다.
+;; #+TAGS: URGENT(u) @PHONE(p) @ERRANDS(e)
+
+;;위의 두 가지 방법이 중복되서 실행은 되지 않는다.
+;;즉 1번 설정을 놓고 org file 처음에 
+;; #+TAGS: TEST(t)
+;;라고 설정을 하면 총 네가지가 미리 나와야 하는데 
+;; 그렇게 나오지를 않는다.
+;; 상황에 맞게 알아서 사용해야겠다.
+
+
+
 
 
 

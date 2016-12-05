@@ -82,7 +82,9 @@
 (require 'emacs-programming)
 (require 'emacs-registers)
 (require 'emacs-extension) ;; file extension
+(require 'emacs-email)
 (require 'emacs-candidate) ;; emacs lisp candidate
+
 
 (when (eq system-type 'darwin)
   (require 'emacs-osx))

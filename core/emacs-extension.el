@@ -31,7 +31,7 @@
         ("\\.pas\\'" . pascal-mode)
         ("\\.ad[abs]\\'" . ada-mode)
         ("\\.\\([pP][Llm]\\|al\\)\\'" . perl-mode)
-	("\\.cgi$"  . perl-mode)
+        ("\\.cgi$"  . perl-mode)
         ("\\.s?html?\\'" . sgml-mode)
         ("\\.idl\\'" . c++-mode)
         ("\\.cc\\'" . c++-mode)
@@ -172,10 +172,10 @@
 
 
 
-
 (add-to-list 'auto-mode-alist '("\\.include$" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.lib$" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.build$" . makefile-mode))
+
 
 
 (provide 'emacs-extension)

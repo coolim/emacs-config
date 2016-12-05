@@ -263,7 +263,7 @@ PROMPT sets the `read-string prompt."
         try-expand-all-abbrevs try-expand-list try-expand-line  
         try-complete-lisp-symbol-partially try-complete-lisp-symbol))
  
-;;; programmed by madman93
+;;; programmed by user
 ;;; utf-8인 경우는 javac -encoding UTF-8 -g filename
  
 ;; UTF-8 유니코드의 경우
@@ -884,6 +884,10 @@ PROMPT sets the `read-string prompt."
 ;; (setq require-final-newline t)
 ;; (setq require-final-newline nil)
 
+;; Stop at the end of the file, not just add lines
+;; (setq next-line-add-newlines nil)
+
+
 
 ;window resize
 ;################################################
@@ -891,7 +895,162 @@ PROMPT sets the `read-string prompt."
 ;; (global-set-key "\C-x." 'enlarge-window)
 ;; (global-set-key "\C-x[" 'shrink-window-horizontally)
 ;; (global-set-key "\C-x]" 'enlarge-window-horizontally)
-;################################################
+;;################################################
+
+
+;; 한글 입려할때 아래 미니버퍼 부분에 한글에 초성 중성 종성으로 나뉘어서
+;; 표시가되는데 상당히 거슬린다 없애버리자!!!!
+;; (setq input-method-verbose-flag nil)
+
+
+
+;;; 잘 안된다 vim의 '' 와 같이 이전으로 돌아가는걸 할려고 그랬는데
+;;; 무엇이 문제일까 나중에 시간 나면 다시 하장!!!!
+(fset 'go-before-position "\C-u\C-SPC")
+(global-set-key "\C-x'" 'go-before-position)
+
+
+
+
+
+;;;;;------------------------------------------------------------
+;;;;; Xsteve라는 사람의 power user tips이다.
+;;;;; http://www.xsteve.at/prg/emacs/power-user-tips.html
+;;;;;-------------------------------------------------------------
+
+;;; find file at point
+(require 'ffap)
+;; rebind C-x C-f and others to the ffap bindings (see variable ffap-bindings)
+(ffap-bindings)
+;;;;;; url주소가 있는 곳에서 아래 명령어를 치면 그 url로 바로 갈 수 있다.
+;;;;;; emacs에 w3m이 있다면 금상첨화이다.
+;; C-u C-x C-f finds the file at point
+(setq ffap-require-prefix t)
+;; browse urls at point via w3m
+(setq ffap-url-fetcher 'w3m-browse-url)
+
+
+
+;;; make TAGS
+(defun tags-generate-c-file ()
+  "generate TAGS file from *.cc and *.hh"
+  (interactive)
+  (setq shell-file-name "/bin/sh")
+  (shell-command "etags *.cc *.hh *.c *.h 2>/dev/null"))
+;  (shell-command "etags *.cc *.hh *.c *.h 2>/dev/null"))
+
+
+
+(defun set-path-mplayer ()
+  "grep-find path"
+  (interactive)
+  (custom-set-variables
+  '(grep-find-command "find /home/user/WorkSpace/wisembed/MPlayer-1.0pre8/ -name \"*.[cChH]\" -not -path \"*svn*\" -type f -print0 | xargs -0 -e grep -n -e ")))
+
+(defun set-path-avtest ()
+  "grep-find path"
+  (interactive)
+  (custom-set-variables
+ '(grep-find-command "find /home/user/WorkSpace/wisembed/acqvtest/ -name \"*.[cChH]\" -not -path \"*svn*\" -type f -print0 | xargs -0 -e grep -n -e ")))
+
+(defun set-path-current ()
+  "grep-find path"
+  (interactive)
+  (custom-set-variables
+ '(grep-find-command "find . -name \"*.[cChH]\" -not -path \"*svn*\" -type f -print0 | xargs -0 -e grep -n -e ")))
+
+(defun set-default-grep-find ()
+  "grep-find path"
+  (interactive)
+  (custom-set-variables
+ '(grep-find-command "find . -name \"*.*\" -not -path \"*svn*\" -type f -print0 | xargs -0 -e grep -n -e ")))
+
+
+
+
+
+
+;;이맥스에서 시스템 모니터링 하기
+;; lynx 가 있어야 ip 쪽은 동작한다.
+
+(defun geektool ()
+  (interactive)
+  (setq initial-frame-alist '((top . 0) (left . 0) (width . 200) (height . 57)))
+  (setq default-frame-alist '((top . 0) (left . 0) (width . 200) (height . 57)))
+  (setq special-display-frame-alist '((top . 0) (left . 0) (width . 200) (height . 57)))
+  (switch-to-buffer-other-frame (buffer-name))
+  ;; full-screen frame settings
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  ;; create windows as needed
+  (delete-other-windows)
+  (split-window-horizontally)
+  (calendar)
+  (split-window)
+  (other-window 0)
+  ;; terminal window width
+  (enlarge-window-horizontally
+   (- 80 (window-width)))
+  (enlarge-window
+   (- 50 (window-height)))
+  ;; now start programms
+  (ansi-term "/bin/bash" "top")
+  (insert "top")
+  (term-send-input)
+  (other-window -1)
+  (split-window)
+  (other-window 1)
+  (switch-to-buffer "Disk")
+  (shell-command "df -h" "Disk")
+  (split-window)
+  (other-window 1)
+  (switch-to-buffer "External IP")
+  (shell-command "echo External IP: `lynx -dump http://checkip.dyndns.org/ | sed 's/[a-zA-Z/ :]//g'`" "External IP")
+  (split-window)
+  (other-window 1)
+  (switch-to-buffer "Who")
+  (shell-command "w" "Who")
+  (with-current-buffer "*top*" (setq buffer-undo-list t)))
+
+
+;;; 항상 emacs shell을 사용하다 보면 tab 완성이 되지를 않아 불편했는데
+;;; 한방에 해결 될 줄이야 ㅋㅋㅋ
+;;; emacs-goodies-el패키지에 포함 되어 있는것 같다.
+;;; http://namazu.org/~tsuchiya/elisp/shell-command.el
+;;; shell command completion mode
+;; (require 'shell-command)
+;; (shell-command-completion-mode)
+
+
+
+
+;;; cwarn-mode는 Emacs로 C/C++ 프로그램을 작성할 때, 
+;;; 에러가 의심되는 부분을 강조해서 보여주는 기능을 하는 minor mode입니다.
+;;; 여기서 에러가 의심되는 부분이란, 조건식 내에 ==가 아니라 =가 쓰인 경우 등을 이야기합니다.
+;;; M-x cwarn-mode
+;;; .emacs 파일에 다음 내용을 추가하면 이 기능이 기본적으로 활성화됩니다.
+
+;; (global-cwarn-mode t)
+
+
+;; 무슨 역활인지 확인하고 활성화 한다.
+;; (setq-default shell-cd-regexp nil)
+;; (setq-default shell-pushd-regexp nil)
+;; (setq-default shell-popd-regexp nil)
+
+
+
+;; Grep settings
+;; (setq grep-null-device "/dev/null")
+;; (setq grep-command "egrep -n")
+
+
+
+
+
+
+
+
 
 
 
