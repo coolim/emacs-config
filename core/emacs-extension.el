@@ -176,6 +176,9 @@
 (add-to-list 'auto-mode-alist '("\\.lib$" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.build$" . makefile-mode))
 
+(add-to-list 'auto-mode-alist '("\\identvq_mancando_defconfig" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\identvq_mancando_navi_defconfig" . conf-mode))
+
 
 
 (provide 'emacs-extension)

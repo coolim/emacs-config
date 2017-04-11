@@ -260,7 +260,8 @@
 ;;;;; -al 과 갈이 되어 있을 것이다. 이것을 변경을 하면 된다.
 ;;; --group-directories-first 는 먼저 디렉토리 먼저 보여준다.
 ;;; 원래는 디렉토리와 파일을 구분없이 보여 주기 때문에 이상한 부분이 있다.
-(setq dired-listing-switches "-aBhl  --group-directories-first")
+;;(setq dired-listing-switches "-aBhl  --group-directories-first")
+(setq dired-listing-switches "-aBl  --group-directories-first")
 ;; (setq dired-listing-switches "-aBlgh")
 ;;(setq dired-listing-switches "-Blh")
 ;; (setq dired-listing-switches "-Blha")
@@ -310,16 +311,16 @@
 ;; Grep Find
 ;; ==================================
 ;; 원래 쓰던 grep-find-command 인데 다른것으로 사용해 보자. 
-;; (setq grep-find-command
-;;       "find . -name \"*\" -not -path \"*svn*\" -not -path \"*git*\" -not -path \"*out*\" -not -name \"TAGS\" -not -name \"cscope.*\" -not -name \"*.so*\" -not -name \"*.o\" -not -name \"*.P\" -not -name \"*.d\" -not -name \"*.apk\" -not -name \"*.a\"  -type f -print0 | xargs -0 -e grep -ni -e ")
+(setq grep-find-command
+      "find . -name \"*\" -not -path \"*svn*\" -not -path \"*git*\" -not -path \"*out*\" -not -name \"TAGS\" -not -name \"cscope.*\" -not -name \"*.so*\" -not -name \"*.o\" -not -name \"*.P\" -not -name \"*.d\" -not -name \"*.apk\" -not -name \"*.a\"  -type f -print0 | xargs -0 -e grep -ni -e ")
 
 ;; 아래 것으로 grep-find 사용해 보자. 
 ;;; Grep is wicked
 ;; Grep/Find.  This needs some cleanup
-(setq grep-command "grep -Irine ")
-(setq grep-find-command
-      (format "%s . -type f \\( -name '*.o' -o -name '*.o.cmd' -o -name 'TAGS' -o -name '*~' -o -name '*#' -o -name '*.log' -o -name 'cscope.*' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
-              find-program grep-command))
+;; (setq grep-command "grep -Irine ")
+;; (setq grep-find-command
+;;       (format "%s . -type f \\( -name '*.o' -o -name '*.o.cmd' -o -name 'TAGS' -o -name '*~' -o -name '*#' -o -name '*.log' -o -name 'cscope.*' -o -path '*CVS/*' -o -path '*.svn/*' -o -path '*.git/*' -o -path '*out/*' -o -path '*development/*' -o -path '*ndk/*' -o -path '*sdk/*' -o -path '*vendor/*' -o -path '*build/*' -prune -o -print0 \\) | xargs -0 %s"
+;;               find-program grep-command))
 
 
 ;; ===================================================================================================

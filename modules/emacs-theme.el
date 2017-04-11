@@ -43,7 +43,7 @@
 (defconst emacs-theme-lists2
   '(
   (load-theme 'adwaita t) 
-  (load-theme 'deeper-blue t) 
+  ;;(load-theme 'deeper-blue t) 
   (load-theme 'dichromacy t) 
   ;;(load-theme 'leuven t)
   (load-theme 'light-blue t) 
