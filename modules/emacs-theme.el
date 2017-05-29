@@ -49,7 +49,7 @@
   (load-theme 'light-blue t) 
   (load-theme 'manoj-dark t) 
   (load-theme 'misterioso t) 
-  (load-theme 'solarized-dark t) 
+  ;;(load-theme 'solarized-dark t) 
   (load-theme 'solarized-light t) 
   (load-theme 'tango t) 
   (load-theme 'tango-dark t) 

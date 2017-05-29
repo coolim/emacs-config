@@ -122,7 +122,7 @@
 ;; 해당하는 가로의 짝을 자동으로 찾는다.
 ;; ===================================================================================================
 (global-set-key (kbd "\C-]") 'match-paren)
-(define-key global-map (kbd "%") 'match-paren)
+;;(define-key global-map (kbd "%") 'match-paren)
 
 
 ;;; lisp file 을 만들었을 때 기본 설명과 provide 를 자동 생성하게 만들었다.
