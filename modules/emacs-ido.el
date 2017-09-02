@@ -5,14 +5,13 @@
 
 ;; ido-mode 관련 내용을 정리해 보자.
 
-
 ;;; ido-ubiquitous 와 flx-ido, smex 를 자동설치 할 수 있는 함수를 불러와야 한다.
-(emacs-require-packages '(flx-ido ido-ubiquitous smex))
+;;(emacs-require-packages '(flx-ido ido-ubiquitous smex))
+(emacs-require-packages '(flx-ido smex))
 
 (require 'ido)
-(require 'ido-ubiquitous)
+;;(require 'ido-ubiquitous)
 (require 'flx-ido)
-
 
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
@@ -23,7 +22,7 @@
       ido-default-file-method 'selected-window
       ido-auto-merge-work-directories-length -1)
 (ido-mode +1)
-(ido-ubiquitous-mode +1)
+;;(ido-ubiquitous-mode +1)
 
 ;;; smarter fuzzy matching for ido
 (flx-ido-mode +1)
