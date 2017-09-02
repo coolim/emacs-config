@@ -261,7 +261,11 @@
 ;;; --group-directories-first 는 먼저 디렉토리 먼저 보여준다.
 ;;; 원래는 디렉토리와 파일을 구분없이 보여 주기 때문에 이상한 부분이 있다.
 ;;(setq dired-listing-switches "-aBhl  --group-directories-first")
-(setq dired-listing-switches "-aBl  --group-directories-first")
+;; mac 일 때는 --group-directories-first 옵션이 없다.
+;; 그래서 C-x d 가 즉, 디렉토리 리스팅이 되지 않는다.
+;; darwin 일 때는 사용하지 않는다.
+(unless (eq system-type 'darwin)
+  (setq dired-listing-switches "-aBl  --group-directories-first"))
 ;; (setq dired-listing-switches "-aBlgh")
 ;;(setq dired-listing-switches "-Blh")
 ;; (setq dired-listing-switches "-Blha")
