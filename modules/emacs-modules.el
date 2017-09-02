@@ -41,8 +41,9 @@
 
 ;;(require 'emacs-slime)
 
-
-(require 'emacs-w3m)
+(unless (eq system-type 'darwin)
+  (require 'emacs-w3m))
+  
 
 (require 'emacs-emms)
 
