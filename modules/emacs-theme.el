@@ -17,7 +17,7 @@
 ;; (color-theme-whateveryouwant)
 
 
-(emacs-require-packages '(zenburn-theme solarized-theme))
+(emacs-require-packages '(zenburn-theme solarized-theme material-theme dracula-theme))
 
 ;; (load-theme 'tango-dark)
 ;; (load-theme 'monokai t)
@@ -47,18 +47,22 @@
   (load-theme 'dichromacy t) 
   ;;(load-theme 'leuven t)
   (load-theme 'light-blue t) 
-  (load-theme 'manoj-dark t) 
+  ;; (load-theme 'manoj-dark t) 
   (load-theme 'misterioso t) 
   ;;(load-theme 'solarized-dark t) 
   (load-theme 'solarized-light t) 
   (load-theme 'tango t) 
-  (load-theme 'tango-dark t) 
-  (load-theme 'tsdh-dark t) 
+  ;; (load-theme 'tango-dark t) 
+  ;; (load-theme 'tsdh-dark t) 
   (load-theme 'tsdh-light t) 
-  (load-theme 'wheatgrass t) 
+  ;; (load-theme 'wheatgrass t) 
   (load-theme 'whiteboard t) 
-  (load-theme 'wombat t) 
-  (load-theme 'zenburn t)))
+  (load-theme 'wombat t)
+  (load-theme 'material t)
+  (load-theme 'material-light t)
+  (load-theme 'dracula t) 
+  ;; (load-theme 'zenburn t)
+  ))
 
 
 (when (eq system-type 'gnu/linux)

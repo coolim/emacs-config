@@ -60,9 +60,9 @@
 
 (defun my-c-mode-common-hook ()
   (c-add-style "PERSONAL" lim-c-style t)
-  (setq tab-width 2
+  (setq tab-width 4
         indent-tabs-mode t
-        c-basic-offset 2)
+        c-basic-offset 4)
   (c-toggle-auto-state -1) ; disable auto-newline mode
   (c-toggle-hungry-state 1) ; enable hungry-delete mode
   (define-key c-mode-base-map "\C-m" 'newline-and-indent)
@@ -71,7 +71,7 @@
   (c-set-offset 'member-init-intro '++)
   (c-set-offset 'inline-open 0)
   (c-set-offset 'comment-intro 0)
-  (c-set-offset 'statement-case-open 2)
+  (c-set-offset 'statement-case-open 4)
   (c-set-offset 'label 0)
   (c-set-offset 'arglist-intro '++)
   (hs-minor-mode 1))
