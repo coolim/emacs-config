@@ -102,8 +102,7 @@
 (fset 'find-prev-tag "\C-u-\256")
 (global-set-key "\M-]" 'find-next-tag)
 (global-set-key "\M-[" 'find-prev-tag)
-
-
+(global-set-key "\M-*" 'pop-tag-mark)
 
 ;; for gdb and grep-mode
 ;;(global-set-key "\C-x\C-n" 'next-error)
