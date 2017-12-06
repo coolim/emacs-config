@@ -86,8 +86,17 @@
   (eval (nth (random (length emacs-theme-sublime-themes)) emacs-theme-sublime-themes)))
 
 
+;; 원래 위의 함수를 사용하면 되지만
+;; 현재 random 으로 선택되어진 theme 이 무엇인지 알려고 setq 를 사용했다.
+;; 지금은 custom-enabled-themes 을 사용하면 된다.
+;; (when (eq system-type 'gnu/linux)
+;;   (setq theme-num (nth (random (length emacs-theme-sublime-themes)) emacs-theme-sublime-themes))
+;;   (message "%s" theme-num)
+;;   (eval theme-num))
 
-;;(message "%s" custom-enabled-themes)
+
+;; 현재 theme 표시
+(message "------------ CURRENT THEME %s" custom-enabled-themes)
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (load-theme 'zenburn t))
