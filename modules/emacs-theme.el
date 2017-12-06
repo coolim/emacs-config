@@ -98,11 +98,20 @@
 ;; 현재 theme 표시
 (message "------------ CURRENT THEME %s" custom-enabled-themes)
 
+
+(defun current-theme ()
+  "현재 적용되어진 테마를 보여준다."
+  (switch-to-buffer "*scratch*" t)
+  (insert (format "---- CURRENT THEME : %s" custom-enabled-themes))
+  )
+
+(current-theme)
 ;; (when (eq system-type 'gnu/linux)
 ;;   (load-theme 'zenburn t))
 
 ;; (when (eq system-type 'darwin)
 ;;   (load-theme 'zenburn t))
+
 
 (provide 'emacs-theme)
 ;;; emacs-theme.el ends here

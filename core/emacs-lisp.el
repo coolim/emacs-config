@@ -153,3 +153,24 @@
 ;;; example
 ;; (debug-msg "CEDET BYTE COMPILATION STATUS:\n\n")
 
+
+
+
+
+;; 아래 처럼 하면 *scratch* 에 있는 내용이 현재  buffer 에 그대로 표시된다.
+;;(insert-buffer "*scratch*")
+
+;; scratch 버퍼에 있는 내용중에 1 라인 20번째 글자까지만 입력한다.
+;;(insert-buffer-substring "*scratch*" 1 20) 
+
+
+
+;; mini buffer 가 active 되어 있을 때 포커스가 바로 간다.
+;; (defun switch-to-minibuffer ()
+;;   "Switch to minibuffer window."
+;;   (interactive)
+;;   (if (active-minibuffer-window)
+;;       (select-window (active-minibuffer-window))
+;;     (error "Minibuffer is not active")))
+
+;; (global-set-key "\C-co" 'switch-to-minibuffer) ;; Bind to `C-c o'

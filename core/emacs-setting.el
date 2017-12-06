@@ -185,7 +185,7 @@
 ;;                 (format "%%b - %semacs" custom-enabled-themes)))
 ;; (setq frame-title-format (format "%%b - %semacs" custom-enabled-themes))
 
-;; (setq frame-title-format (format "%%f - %%s %s" custom-enabled-themes))
+;;(setq frame-title-format (format "%%f - %%s %s" custom-enabled-themes))
 
 
 
