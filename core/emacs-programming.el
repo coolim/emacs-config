@@ -79,6 +79,13 @@
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 
+;; 현재 폴더에 h, c 파일이 같이 있으면 바로 토클 오픈이 가능하도록 했다.
+(add-hook 'c++-mode-hook
+           '(lambda ()
+              (define-key c-mode-base-map (kbd "M-o") 'ff-find-other-file)))
+(add-hook 'c-mode-hook
+           '(lambda ()
+              (define-key c-mode-base-map (kbd "M-o") 'ff-find-other-file)))
 
 
 

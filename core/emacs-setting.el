@@ -316,7 +316,7 @@
 ;; ==================================
 ;; 원래 쓰던 grep-find-command 인데 다른것으로 사용해 보자. 
 (setq grep-find-command
-      "find . -name \"*\" -not -path \"*svn*\" -not -path \"*git*\" -not -path \"*out*\" -not -name \"TAGS\" -not -name \"cscope.*\" -not -name \"*.so*\" -not -name \"*.o\" -not -name \"*.P\" -not -name \"*.d\" -not -name \"*.apk\" -not -name \"*.img\" -not -name \"*.a\"  -type f -print0 | xargs -0 -e grep -ni -e ")
+      "find . -name \"*\" -not -path \"*svn*\" -not -path \"*elpa*\"  -not -path \"*git*\" -not -path \"*out*\" -not -name \"TAGS\" -not -name \"cscope.*\" -not -name \"*.so*\" -not -name \"*.o\" -not -name \"*.P\" -not -name \"*.d\" -not -name \"*.apk\" -not -name \"*.img\" -not -name \"*.a\"  -type f -print0 | xargs -0 -e grep -ni -e ")
 
 ;; 아래 것으로 grep-find 사용해 보자. 
 ;;; Grep is wicked

@@ -174,3 +174,19 @@
 ;;     (error "Minibuffer is not active")))
 
 ;; (global-set-key "\C-co" 'switch-to-minibuffer) ;; Bind to `C-c o'
+
+
+
+;; 미니버퍼 다루기 
+;; (read-from-minibuffer "Directory: " default-directory)
+
+;; (let ((directory (read-from-minibuffer 
+;;                   (format "Directory (default %s): " default-directory) 
+;;                   nil nil nil nil default-directory))) 
+;;    (if (equal directory "") 
+;;        default-directory 
+;;      directory))
+
+;; (let ((insert-default-directory t)) 
+;;   (read-directory-name "Directory: " default-directory))
+

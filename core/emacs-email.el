@@ -2,8 +2,8 @@
 ;;; Copyright (C) 2016 by KudzuValley
 
 
-(setq user-mail-address "user@server.co.kr")
-(setq mail-host-address "server.co.kr")
+(setq user-mail-address "yhlim@hutek.net")
+(setq mail-host-address "hutek.net")
 
 
 

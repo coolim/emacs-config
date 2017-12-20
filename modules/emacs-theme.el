@@ -76,14 +76,49 @@
     (load-theme 'junio t)
     ))
 
+;; all themes
+(defconst emacs-theme-all-themes
+  '(
+    (load-theme 'brin t)
+    (load-theme 'granger t)
+    (load-theme 'spolsky t)
+    (load-theme 'graham t)
+    (load-theme 'odersky t)
+    (load-theme 'hickey t)
+    (load-theme 'fogus t)
+    (load-theme 'dorsey t)
+    (load-theme 'mccarthy t)
+    (load-theme 'wilson t)
+    (load-theme 'junio t)
+    (load-theme 'adwaita t) 
+    (load-theme 'dichromacy t) 
+    (load-theme 'light-blue t) 
+    (load-theme 'solarized-light t) 
+    (load-theme 'tango t) 
+    (load-theme 'tsdh-light t) 
+    (load-theme 'whiteboard t) 
+    (load-theme 'wombat t)
+    (load-theme 'material-light t)
+    (load-theme 'dracula t) 
+    ))
+
+
+
 
 ;; default random themes
 ;; (when (eq system-type 'gnu/linux)
 ;;   (eval (nth (random (length emacs-theme-lists)) emacs-theme-lists)))
 
 
+;; sublime themes
+;; (when (eq system-type 'gnu/linux)
+;;   (eval (nth (random (length emacs-theme-sublime-themes)) emacs-theme-sublime-themes)))
+
+
+;; all themes
 (when (eq system-type 'gnu/linux)
-  (eval (nth (random (length emacs-theme-sublime-themes)) emacs-theme-sublime-themes)))
+  (eval (nth (random (length emacs-theme-sublime-themes)) emacs-theme-all-themes)))
+
 
 
 ;; 원래 위의 함수를 사용하면 되지만
@@ -102,15 +137,66 @@
 (defun current-theme ()
   "현재 적용되어진 테마를 보여준다."
   (switch-to-buffer "*scratch*" t)
-  (insert (format "---- CURRENT THEME : %s" custom-enabled-themes))
-  )
-
+  (insert (format "---- CURRENT THEME : %s" custom-enabled-themes)))
 (current-theme)
+
 ;; (when (eq system-type 'gnu/linux)
 ;;   (load-theme 'zenburn t))
 
 ;; (when (eq system-type 'darwin)
 ;;   (load-theme 'zenburn t))
+
+ ;; (setq mode-line-format
+ ;;          (list
+ ;;           ;; value of `mode-name'
+ ;;           "%m: "
+ ;;           ;; value of current buffer name
+ ;;           "buffer %b, "
+ ;;           ;; value of current line number
+ ;;           "line %l "
+ ;;           "-- user: "
+ ;;           ;; value of user
+ ;;           (getenv "USER")))
+
+
+;; (setq mode-line-system-identification  
+;;   (substring (system-name) 0
+;;              (string-match "\\..+" (system-name))))
+
+
+;; (setq default-mode-line-format
+;;       (list ""
+;;             'mode-line-modified
+;;             "<"
+;;             'mode-line-system-identification
+;;             "> "
+;;             "%14b"
+;;             " "
+;;             'default-directory
+;;             " "
+;;             "%[(" 
+;;             'mode-name 
+;;             'minor-mode-alist 
+;;             "%n" 
+;;             'mode-line-process  
+;;             ")%]--" 
+;;              "Line %l--"
+;;             '(-3 . "%P")
+;;             "-%-"))
+
+;; ;; Start with new default.
+;; (setq mode-line-format default-mode-line-format)
+
+
+;; 아래 처럼 하면 minibuffer 에에 Directory: 라고 표시되고 directory 선택 창이 나온다.
+;; 직접 아래 한줄을 실행해 보는게 빠르다.
+;;(read-from-minibuffer "Directory: " default-directory)
+
+;; 현재 theme 를 미니버퍼에 뿌린다.
+;;(read-from-minibuffer (format "Current Theme: %s" custom-enabled-themes))
+
+;; 현재 theme 을 대문자로 해서 가로 제거하고 보여준다.
+;;(read-from-minibuffer (upcase (replace-regexp-in-string ")" "" (replace-regexp-in-string "(" "" (format "%s" custom-enabled-themes)))))
 
 
 (provide 'emacs-theme)
