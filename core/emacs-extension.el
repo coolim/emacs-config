@@ -170,6 +170,15 @@
       (append '(("\\.diff$"  . diff-mode))
               auto-mode-alist))
 
+(setq auto-mode-alist
+      (append '(("\\.json$"  . json-mode))
+              auto-mode-alist))
+
+(setq auto-mode-alist
+      (append '(("\\.go$"  . go-mode))
+              auto-mode-alist))
+
+
 
 
 (add-to-list 'auto-mode-alist '("\\.include$" . makefile-mode))

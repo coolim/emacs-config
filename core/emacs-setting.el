@@ -392,6 +392,18 @@
   ;; Since we killed it, don't let caller do that.
   nil)
 
+;; git 에서 명령어를 사용하면 
+;; WARNING: terminal is not fully functional
+;; -  (press RETURN)
+;; 이와 같은 현상이 발생하며 Enter 를 한번 더 해야 정상 화면이 보여지는 경우가 생긴다.
+;; 이럴 경우 터미널에서 아래 설정을 하면 된다. 아래 명령은 git 에만 적용하는게 아닌것 같지만 확인해 보지는 않았다.
+;; export PAGER=cat
+;; 적어도 git 같은 경우는 아래 명령을 사용하면 되고 
+;;(setenv "GIT_PAGER" "")
+;; 현재는 아래 명령을 사용하고 있다.
+(setenv "GIT_PAGER" "nkf -w|colordiff")
+
+
 
 
 (provide 'emacs-setting)
