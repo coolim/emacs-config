@@ -25,7 +25,7 @@
 
 
 (setq-default indent-tabs-mode nil)
-(setq default-tab-width 4)
+(setq-default tab-width 4)
 
 (setq track-eol nil)
 (setq scroll-step 1)
@@ -606,7 +606,7 @@ PROMPT sets the `read-string prompt."
 (add-hook 'python-mode-hook (lambda () (define-key python-mode-map "\C-c\C-s" 'python-set-web-preview)))
 (add-hook 'python-mode-hook (lambda () (setq parens-require-spaces nil)))
 (add-hook 'python-mode-hook (lambda () (setq fill-column 75)))
-(add-hook 'python-mode-hook (lambda () (auto-fill-mode 1)))
+;;(add-hook 'python-mode-hook (lambda () (auto-fill-mode 1)))
 
 (add-hook 'css-mode-hook (lambda () (define-key css-mode-map "\C-m" 'newline-and-indent)))
 (add-hook 'css-mode-hook (lambda () (define-key css-mode-map "\C-c\C-c" 'comment-region)))

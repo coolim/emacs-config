@@ -19,6 +19,13 @@
 (global-set-key [f12] 'helm-recentf)
 
 
+(setq helm-ff-file-name-history-use-recentf t)
+(setq recentf-max-saved-items 500)
+(setq recentf-max-menu-items 60)
+(setq recentf-auto-cleanup 'never)
+;;(setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/games/*-scores" "/\\.emacs\\.d/\\.cask/"))
+(setq recentf-auto-save-timer (run-with-idle-timer 300 t 'recentf-save-list))
+
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."
   (interactive)

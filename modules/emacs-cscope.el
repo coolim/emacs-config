@@ -14,6 +14,16 @@
 (require 'xcscope)
 (cscope-setup)
 
+;; (setq cscope-option-do-not-update-database t)
+;; use cscope -q option
+;; cscope -b -q -k 명령어로 index 를 생성하는데 -q 옵션을 사용해서 quick을 사용했으면
+;; 사용할 때도 -q 옵연을 사용해야 한다.
+;; 아니면 -q option mismatch between command line and old symbol database 오류를 내면서
+;; 다시 인덱싱을 한다.
+(setq cscope-option-use-inverted-index t) 
+;; (setq cscope-option-kernel-mode t)
+
+
 (define-key global-map [(control f3)]  'cscope-set-initial-directory)
 (define-key global-map [(control f4)]  'cscope-unset-initial-directory)
 (define-key global-map [(control f5)]  'cscope-find-this-symbol)

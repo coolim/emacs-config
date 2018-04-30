@@ -85,17 +85,6 @@ Point and markers are relocated as in the function `insert'."
   (insert "// {")
 )
 
-(defun insert-code-modify-Begin ()
-  "modify code date"
-  (interactive)
-  (newline)  
-  (insert "//LYH ")
-  (insert-date)  
-  (insert " Begin ")
-  (newline)
-  (insert "// {")
-)
-
 (defun insert-code-modify-End ()
   "modify code date"
   (interactive)

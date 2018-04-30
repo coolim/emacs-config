@@ -83,22 +83,22 @@
     ;;(load-theme 'granger t)
     ;;(load-theme 'spolsky t)
     ;;(load-theme 'graham t)
-    (load-theme 'odersky t)
+    ;;(load-theme 'odersky t)
     ;;(load-theme 'hickey t)
-    (load-theme 'fogus t)
-    (load-theme 'dorsey t)
+    ;;(load-theme 'fogus t)
+    ;;(load-theme 'dorsey t)
     ;;(load-theme 'mccarthy t)
-    (load-theme 'wilson t)
-    (load-theme 'junio t)
-    (load-theme 'adwaita t) 
-    (load-theme 'dichromacy t) 
-    (load-theme 'light-blue t) 
-    (load-theme 'solarized-light t) 
-    (load-theme 'tango t) 
-    (load-theme 'tsdh-light t) 
-    (load-theme 'whiteboard t) 
+    ;;(load-theme 'wilson t)
+    ;;(load-theme 'junio t)
+    ;;(load-theme 'adwaita t) 
+    ;;(load-theme 'dichromacy t) 
+    ;;(load-theme 'light-blue t) 
+    ;;(load-theme 'solarized-light t) 
+    ;;(load-theme 'tango t) 
+    ;;(load-theme 'tsdh-light t) 
+    ;;(load-theme 'whiteboard t) 
     ;;(load-theme 'wombat t)
-    (load-theme 'material-light t)
+    ;;(load-theme 'material-light t)
     ;;(load-theme 'dracula t)
     ;;(load-theme 'blackboard t)
     ))
@@ -113,6 +113,14 @@
     (load-theme 'blackboard t)
     (load-theme 'spolsky t)
     (load-theme 'hickey t)
+    (load-theme 'light-blue t)
+    (load-theme 'adwaita t)
+    (load-theme 'tango t)
+    (load-theme 'dichromacy t)
+    (load-theme 'material-light t)
+    (load-theme 'junio t)
+    (load-theme 'whiteboard t)
+    (load-theme 'tsdh-light t) 
     (insert "default") 
     ))
 
@@ -130,12 +138,12 @@
 
 
 ;; all themes
-(when (eq system-type 'gnu/linux)
-  (eval (nth (random (length emacs-theme-all-themes)) emacs-theme-all-themes)))
-
-
 ;; (when (eq system-type 'gnu/linux)
-;;   (eval (nth (random (length emacs-theme-lim-themes)) emacs-theme-lim-themes)))
+;;   (eval (nth (random (length emacs-theme-all-themes)) emacs-theme-all-themes)))
+
+
+(when (eq system-type 'gnu/linux)
+  (eval (nth (random (length emacs-theme-lim-themes)) emacs-theme-lim-themes)))
 
 
 

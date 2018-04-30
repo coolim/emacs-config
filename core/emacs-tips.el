@@ -794,6 +794,7 @@
 (setq default-major-mode 'indented-text-mode)
 ;; auto-fill 에 설정되어 있으면 문장이 길어지면 자동으로 다음 줄로 넘어간다. 극혐이다.
 ;;(toggle-text-mode-auto-fill)            ; always auto-fill in text mode,
+(auto-fill-mode -1)
 
 ;; for org tags test
 ;; 자주 사용하는 태그를 미리 저장해 놓고 쓰면
