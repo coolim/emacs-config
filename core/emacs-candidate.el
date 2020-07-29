@@ -1046,13 +1046,35 @@ PROMPT sets the `read-string prompt."
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ansi settings but do not work
+
+;; (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; (defun force-lc-all-for-shell ()
+;;   "For the benefit of python we force LC_ALL to utf-8."
+;;   (comint-send-string (get-buffer-process (current-buffer)) "LC_ALL=en_US.UTF-8\n"))
+;; (add-hook 'shell-mode-hook 'force-lc-all-for-shell)
+
+;; (add-hook 'shell-mode-hook
+;;       (lambda ()
+;;         (face-remap-set-base 'comint-highlight-prompt :inherit nil)))
 
 
+;; (require 'ansi-color)
+
+;; (defadvice display-message-or-buffer (before ansi-color activate)
+;;   "Process ANSI color codes in shell output."
+;;   (let ((buf (ad-get-arg 0)))
+;;     (and (bufferp buf)
+;;          (string= (buffer-name buf) "*Shell Command Output*")
+;;          (with-current-buffer buf
+;;            (ansi-color-apply-on-region (point-min) (point-max))))))
 
 
+;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (provide 'emacs-candidate)

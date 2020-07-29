@@ -108,17 +108,12 @@
 (defconst emacs-theme-lim-themes
   '(
     (load-theme 'mccarthy t)
-    (load-theme 'wombat t)
     (load-theme 'dracula t)
     (load-theme 'blackboard t)
-    (load-theme 'spolsky t)
-    (load-theme 'hickey t)
-    (load-theme 'light-blue t)
     (load-theme 'adwaita t)
     (load-theme 'tango t)
     (load-theme 'dichromacy t)
     (load-theme 'material-light t)
-    (load-theme 'junio t)
     (load-theme 'whiteboard t)
     (load-theme 'tsdh-light t) 
     (insert "default") 

@@ -20,7 +20,9 @@
 ;; 사용할 때도 -q 옵션을 사용해야 한다.
 ;; 아니면 -q option mismatch between command line and old symbol database 오류를 내면서
 ;; 다시 인덱싱을 한다.
-(setq cscope-option-use-inverted-index t) 
+
+
+;;(setq cscope-option-use-inverted-index t) 
 ;; (setq cscope-option-kernel-mode t)
 
 
